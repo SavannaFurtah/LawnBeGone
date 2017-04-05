@@ -15,7 +15,7 @@ public class LawnCutter {
     private int cutterId;
     private String firstName;
     private String lastName;
-    private int SocInsNum;
+    private int socInsNum;
     private String address;
     private String city;
     private String province;
@@ -25,11 +25,11 @@ public class LawnCutter {
     private String email;
     private Date birthday;
 
-    public LawnCutter(int cutterId, String firstName, String lastName, int SocInsNum, String address, String city, String province, String country, String postalCode, String phoneNumber, String email, Date birthday) {
+    public LawnCutter(int cutterId, String firstName, String lastName, int socInsNum, String address, String city, String province, String country, String postalCode, String phoneNumber, String email, Date birthday) {
         this.cutterId = cutterId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.SocInsNum = SocInsNum;
+        this.socInsNum = socInsNum;
         this.address = address;
         this.city = city;
         this.province = province;
@@ -67,12 +67,12 @@ public class LawnCutter {
         this.lastName = lastName;
     }
 
-    public int getSocInsNum() {
-        return SocInsNum;
+    public int getsocInsNum() {
+        return socInsNum;
     }
 
-    public void setSocInsNum(int SocInsNum) {
-        this.SocInsNum = SocInsNum;
+    public void setsocInsNum(int socInsNum) {
+        this.socInsNum = socInsNum;
     }
 
     public String getAddress() {
