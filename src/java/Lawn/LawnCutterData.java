@@ -27,7 +27,7 @@ import javax.inject.Named;
 @ManagedBean
 public class LawnCutterData {
     private List<LawnCutter> cutter = new ArrayList<>();
-    private LawnCutter currentCutter;
+    private LawnCutter currentCutter = new LawnCutter();
 
     public LawnCutterData() {
     }
@@ -124,5 +124,9 @@ public class LawnCutterData {
         }
         return "index";
     } 
-    
+    /*
+    @PostConstruct
+    public void init() {
+        currentCutter = new LawnCutter();
+    }*/
 }

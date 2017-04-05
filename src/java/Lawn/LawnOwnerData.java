@@ -14,17 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author c0656308
  */
+@Named
+@ApplicationScoped
 public class LawnOwnerData {
+
     private List<LawnOwner> owner = new ArrayList<>();
-    private LawnOwner currentOwner;
+    private LawnOwner currentOwner = new LawnOwner();
 
     public LawnOwnerData() {
-        refresh();
     }
 
     public LawnOwnerData(LawnOwner currentOwner) {
@@ -46,7 +50,7 @@ public class LawnOwnerData {
     public void setCurrentOwner(LawnOwner currentOwner) {
         this.currentOwner = currentOwner;
     }
-    
+
     private void refresh() {
         try {
             owner.clear();
@@ -66,10 +70,10 @@ public class LawnOwnerData {
                         rs.getString("phoneNumber"),
                         rs.getString("email"),
                         rs.getInt("creditCardNum"),
-                         rs.getInt("securityCode"),
-                         rs.getInt("expDate"),
-                         rs.getString("preferences")                        
-                ); 
+                        rs.getInt("securityCode"),
+                        rs.getInt("expMonth"),
+                        rs.getInt("expYear")
+                );
                 owner.add(own);
             }
         } catch (SQLException ex) {
@@ -77,7 +81,7 @@ public class LawnOwnerData {
             owner.clear();
         }
     }
-    
+
     private int findOwnerId() {
         int i = 0;
         for (LawnOwner o : owner) {
@@ -100,25 +104,25 @@ public class LawnOwnerData {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, num);
             pstmt.setString(2, currentOwner.getFirstName());
-            pstmt.setString(3,currentOwner.getLastName());
-            pstmt.setString(4,currentOwner.getAddress());
-            pstmt.setString(5,currentOwner.getCity());
+            pstmt.setString(3, currentOwner.getLastName());
+            pstmt.setString(4, currentOwner.getAddress());
+            pstmt.setString(5, currentOwner.getCity());
             pstmt.setString(6, currentOwner.getProvince());
-            pstmt.setString(7,currentOwner.getPostalCode());
-            pstmt.setString(8,currentOwner.getCountry());
+            pstmt.setString(7, currentOwner.getPostalCode());
+            pstmt.setString(8, currentOwner.getCountry());
             pstmt.setString(9, currentOwner.getEmail());
-            pstmt.setString(10,currentOwner.getPhoneNumber());
+            pstmt.setString(10, currentOwner.getPhoneNumber());
             pstmt.setInt(11, currentOwner.getCreditCardNum());
             pstmt.setInt(12, currentOwner.getSecurityCode());
-            pstmt.setInt(13,currentOwner.getExpDate());
-            pstmt.setString(14,currentOwner.getPreferences());
-            
+            pstmt.setInt(13, currentOwner.getExpMonth());
+            pstmt.setInt(14, currentOwner.getExpYear());
+
             pstmt.executeUpdate();
             owner.add(currentOwner);
-            currentOwner = new LawnOwner();  
+            currentOwner = new LawnOwner();
         } catch (SQLException ex) {
             Logger.getLogger(LawnOwner.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "index";
-    }       
+    }
 }

@@ -22,13 +22,13 @@ public class LawnOwner {
     private String email;
     private int creditCardNum;
     private int securityCode;
-    private int expDate;
-    private String preferences;
+    private int expMonth;
+    private int expYear;
 
     public LawnOwner() {
     }
 
-    public LawnOwner(int customerId, String firstName, String lastName, String address, String city, String province, String country, String postalCode, String phoneNumber, String email, int creditCardNum, int securityCode, int expDate, String preferences) {
+    public LawnOwner(int customerId, String firstName, String lastName, String address, String city, String province, String country, String postalCode, String phoneNumber, String email, int creditCardNum, int securityCode, int expMonth, int expYear) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,8 +41,8 @@ public class LawnOwner {
         this.email = email;
         this.creditCardNum = creditCardNum;
         this.securityCode = securityCode;
-        this.expDate = expDate;
-        this.preferences = preferences;
+        this.expMonth = expMonth;
+        this.expYear = expYear;
     }
 
     public int getCustomerId() {
@@ -141,20 +141,20 @@ public class LawnOwner {
         this.securityCode = securityCode;
     }
 
-    public int getExpDate() {
-        return expDate;
+    public int getExpMonth() {
+        return expMonth;
     }
 
-    public void setExpDate(int expDate) {
-        this.expDate = expDate;
+    public void setExpMonth(int expMonth) {
+        this.expMonth = expMonth;
+    }
+    
+    public int getExpYear() {
+        return expYear;
     }
 
-    public String getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(String preferences) {
-        this.preferences = preferences;
+    public void setExpYear(int expYear) {
+        this.expYear = expYear;
     }
     
     
