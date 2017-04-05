@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Join Today</title>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"></link>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <style> 
+            h1{
+                text-align: center;
+            }
+            #loginDiv{
+                display: inline-block;
+                text-align: center;
+            }
+        </style>
+    </h:head>
+    <h:body><div class="container">
+            <h:form class="form-horizontal">
+
+                <h1>Join Today!</h1>
+                <br />
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">First Name:</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="textinput" value="#{lawnOwnerData.currentOwner.firstName}" class="form-control input-md" required=""/>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="lastName">Last Name:</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="lastName" value="#{lawnOwnerData.currentOwner.lastName}" class="form-control input-md" required=""/>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="streetAddress">Street Address</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="streetAddress" value="#{lawnOwnerData.currentOwner.address}" class="form-control input-md" required=""/>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="city">City:</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="city" value="#{lawnOwnerData.currentOwner.city}" class="form-control input-md" required=""/>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="postCode">Postal Code:</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="postCode" value="#{lawnOwnerData.currentOwner.postalCode}" class="form-control input-md" required=""/>
+
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="prov">Province</label>
+                    <div class="col-md-4">
+                        <h:inputText id="province" value="#{lawnOwnerData.currentOwner.province}" class="form-control input-md" required=""/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="phone">Phone Number:</label>  
+                    <div class="col-md-4">
+                        <h:inputText id="phone" value="#{lawnOwnerData.currentOwner.phoneNumber}" class="form-control input-md" required=""/>
+                        <span class="help-block">(xxx) xxx-xxxx</span>  
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="terms">I Agree to the Terms and Conditions</label>
+                    <div class="col-md-4">
+                        <label class="checkbox-inline" for="terms-0">
+                            <input type="checkbox" name="terms" id="terms-0" value="yes" checked="true"/>
+                            Yes
+                        </label>
+                        <label class="checkbox-inline" for="terms-1">
+                            <input type="checkbox" name="terms" id="terms-1" value="no"/>
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-12" id="loginDiv">
+                    <h:commandButton class="btn btn-info" id="join" value="Join!"/>
+                </div>
+
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
