@@ -18,7 +18,8 @@ public class User {
     public User() {
     }
 
-    public User(String email, String hashedPassword, String firstName, String lastName, String address, String city, String province, String country, String postalCode) {
+    public User(int id, String email, String hashedPassword, String firstName, String lastName, String address, String city, String province, String country, String postalCode) {
+        this.id = id;
         this.email = email;
         this.hashedPassword = hashedPassword;
         this.firstName = firstName;

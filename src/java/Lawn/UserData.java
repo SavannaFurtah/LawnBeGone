@@ -15,10 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * This bean manages the user's functions for the session
  * @author c0538434
  */
 @Named
@@ -28,7 +29,8 @@ public class UserData {
     private User currentUser = new User();
     private String password;
     private int nextUserId;
-    private UserList ul = new UserList();
+    @Inject
+    private UserList ul;
     private boolean loggedIn = false;
     
     public UserData() {
@@ -36,27 +38,32 @@ public class UserData {
     }
     
     public String createUser() {
-        int id = ul.getNextUserId();
-        currentUser.setId(id);
+        
         try (Connection conn = (Connection) DBUtils.getConnection()) {
-            String sql = "INSERT INTO users (id, email, hashedPassword) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO users (email, hashedPassword) VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, currentUser.getId());
-            pstmt.setString(2, currentUser.getEmail());
-            pstmt.setString(3, hashPass(password));
+            pstmt.setString(1, currentUser.getEmail());
+            pstmt.setString(2, hashPass(password));
             pstmt.executeUpdate();
-            ul.getUserList().add(currentUser);
+            ul.addToUserList(currentUser);
             loggedIn = true;
             return "index";
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, "Test", ex);
             currentUser = new User();
+            
             return "UserRegistration";
         }
     }
     
+    /**
+     * This only sort of belongs in this scope but go ahead, call the cops,
+     * they can't un-wrong-scope it.
+     * @param pw The password to salt and hash
+     * @return Salted and Hashed password
+     */
     public String hashPass (String pw) {
-        final String SALT = "HEREcomesTheSALTforThePasswordsToBeSecure";
+        final String SALT = "HEREcomesThe246SALTforThePasswordsToBeSecure";
         try {
             String salted = pw + SALT;
             MessageDigest md = MessageDigest.getInstance("SHA1");
@@ -73,4 +80,45 @@ public class UserData {
             return null;
         }
     }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getNextUserId() {
+        return nextUserId;
+    }
+
+    public void setNextUserId(int nextUserId) {
+        this.nextUserId = nextUserId;
+    }
+
+    public UserList getUl() {
+        return ul;
+    }
+
+    public void setUl(UserList ul) {
+        this.ul = ul;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+    
 }
