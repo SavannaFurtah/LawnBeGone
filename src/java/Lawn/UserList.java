@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -41,6 +40,15 @@ public class UserList {
             if (targetEmail.toLowerCase().equals(u.getEmail().toLowerCase())) {
                 return true;
             }
+        }
+        return false;
+    }
+    
+    public boolean verifyCredentials(String username, String passHash) {
+        for (User u : userList) {
+            if (username.toLowerCase().equals(u.getEmail().toLowerCase()))
+                if (passHash.equals(u.getHashedPassword()))
+                    return true;
         }
         return false;
     }

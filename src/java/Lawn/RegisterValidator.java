@@ -19,7 +19,7 @@ import javax.inject.Inject;
  * password confirmation validator.
  * http://stackoverflow.com/questions/7489893/how-validate-two-password-fields-by-ajax
  * 
- * This is also a bit of a hack because validators can't actually inject
+ * This is also a bit of a hack because facesvalidators can't actually inject
  * due to an oversight that isn't fixed, so I dunno it's crazy.
  *
  * @author c0538434

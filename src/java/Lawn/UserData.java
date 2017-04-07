@@ -13,8 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -38,12 +40,12 @@ public class UserData {
     }
     
     public String createUser() {
-        
+        currentUser.setHashedPassword(hashPass(password));
         try (Connection conn = (Connection) DBUtils.getConnection()) {
             String sql = "INSERT INTO users (email, hashedPassword) VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, currentUser.getEmail());
-            pstmt.setString(2, hashPass(password));
+            pstmt.setString(2, currentUser.getHashedPassword());
             pstmt.executeUpdate();
             ul.addToUserList(currentUser);
             loggedIn = true;
@@ -54,6 +56,23 @@ public class UserData {
             
             return "UserRegistration";
         }
+    }
+    
+    public String loginUser() {
+        currentUser.setHashedPassword(hashPass(password));
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
+            loggedIn = true;
+            return "index";
+        }
+        facesContext.addMessage("loginForm", new FacesMessage("Username or Password is incorrect."));
+        return null;
+    }
+    
+    public String logoutUser() {
+        currentUser = new User();
+        loggedIn = true;
+        return "index";
     }
     
     /**
