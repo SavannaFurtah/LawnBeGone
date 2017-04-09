@@ -18,10 +18,18 @@ and open the template in the editor.
             h1,h2{
                 text-align: center;
             }
+            p {
+                text-align: center;
+            }
             button{
                 display:block; 
                 margin:0 auto;
                 position:relative;
+            }
+            #userJoin {
+                display: block;
+                margin: 0 auto;
+                position: relative;
             }
             #join{
                 display:block; 
@@ -53,31 +61,21 @@ and open the template in the editor.
             <h1>Welcome to Lawn-Be-Gone!</h1>
 
            
-            <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah 
-                Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah 
-                Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah 
-                Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah </p>
+            <p>Lawn-Be-Gone needs you! Earn money as an independent
+                contractor doing complete grounds maintenance. 
+                Create your own schedule and be your own boss! </p>
+            <p>Do you need your lawn cut? Sign up and receive lawn care within minutes.</p>
 
 
             <h1>Join Today!</h1>
 
-            <div class ="col-md-6">
-                <h2>Lawn Owner:</h2>
+            <div class ="col-md-12" id="loginDiv">
+                <h2>Create a new account:</h2>
 
                 <h3>Info about lawn owner Blah Blah Blah Blah Blah Blah
                     Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</h3>
                 <h:form>
-                <h:button id="ownerJoin" value="User Registration" class="btn btn-success" outcome="UserRegistration" /></h:form>
-            </div>
-            <div class ="col-md-6" >
-                <h2>Lawn Cutter:</h2>
-
-                <h3>Info about lawn cutter Blah Blah Blah Blah Blah Blah
-                    Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</h3>
-                <h:form>
-                <h:button value="Join" class="btn btn-success" outcome="HeaderBar" /></h:form>
+                <h:button id="userJoin" value="User Registration" class="btn btn-success" outcome="UserRegistration" /></h:form>
             </div>
 
             <div class="col-md-12" id="loginDiv">
