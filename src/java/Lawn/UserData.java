@@ -35,6 +35,7 @@ public class UserData {
     private UserList ul;
     private boolean loggedIn = false;
     
+   
     public UserData() {
         
     }
@@ -138,6 +139,33 @@ public class UserData {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+    
+
+    
+    public String edit () {
+       return "editUser";
+    }
+    
+    public String saveUser() {
+        try (Connection conn = DBUtils.getConnection()) {
+            if (currentUser.getId() >= 0) {
+                String sql = "UPDATE users SET first_name = ?, last_name = ?, address = ?, city = ?, province = ?, country = ?, postal_code = ? WHERE id = currentUser.getId()";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, currentUser.getFirstName());
+                pstmt.setString(2, currentUser.getLastName());
+                pstmt.setString(3,currentUser.getAddress());
+                pstmt.setString(4,currentUser.getCity());
+                pstmt.setString(5, currentUser.getCountry());
+                pstmt.setString(6,currentUser.getPostalCode());
+                pstmt.executeUpdate();
+                return "index";
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "index";
     }
     
 }
