@@ -28,6 +28,7 @@ import javax.inject.Named;
 @SessionScoped
 @ManagedBean
 public class UserData {
+    
     private User currentUser = new User();
     private String password;
     private int nextUserId;
@@ -161,7 +162,7 @@ public class UserData {
                 pstmt.setString(7,currentUser.getPostalCode());
                 pstmt.setInt(8,currentUser.getId());
                 pstmt.executeUpdate();
-                return "index";
+                return "HeaderBar";
             }
             
         } catch (SQLException ex) {
