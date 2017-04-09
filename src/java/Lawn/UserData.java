@@ -150,14 +150,16 @@ public class UserData {
     public String saveUser() {
         try (Connection conn = DBUtils.getConnection()) {
             if (currentUser.getId() >= 0) {
-                String sql = "UPDATE users SET first_name = ?, last_name = ?, address = ?, city = ?, province = ?, country = ?, postal_code = ? WHERE id = currentUser.getId()";
+                String sql = "UPDATE users SET first_name = ?, last_name = ?, address = ?, city = ?, province = ?, country = ?, postal_code = ? WHERE id = ?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, currentUser.getFirstName());
                 pstmt.setString(2, currentUser.getLastName());
                 pstmt.setString(3,currentUser.getAddress());
                 pstmt.setString(4,currentUser.getCity());
-                pstmt.setString(5, currentUser.getCountry());
-                pstmt.setString(6,currentUser.getPostalCode());
+                pstmt.setString(5, currentUser.getProvince());
+                pstmt.setString(6, currentUser.getCountry());
+                pstmt.setString(7,currentUser.getPostalCode());
+                pstmt.setInt(8,currentUser.getId());
                 pstmt.executeUpdate();
                 return "index";
             }
@@ -165,7 +167,7 @@ public class UserData {
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "index";
+        return "login";
     }
     
 }
