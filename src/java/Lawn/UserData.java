@@ -63,7 +63,7 @@ public class UserData {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
             loggedIn = true;
-            return "index";
+            return "HeaderBar";
         }
         facesContext.addMessage("loginForm", new FacesMessage("Username or Password is incorrect."));
         return null;
