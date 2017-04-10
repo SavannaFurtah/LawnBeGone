@@ -11,17 +11,11 @@
         <link href="css/projectStyling.css" rel="stylesheet" />
         <script src="http://code.jquery.com/jquery.min.js"></script>
 
-        <title>Add a Job</title>
-        <!--        <style>
-                    a:hover {
-                        font-weight: bold;
-                        text-decoration: none;
-                    }
-                </style>-->
+        <title>Post Job</title>
     </h:head>     
     <h:body>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -30,55 +24,61 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Lawn-Be-Gone</a>
+                    <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li  class="active"><a href="JobList.xhtml">Jobs</a></li>
-                        <li><a href="PostJob.xhtml">Posts</a></li>
+                        <li><a href="JobList.xhtml">Jobs</a></li>
+                        <li class="active"><a href="PostJob.xhtml">Posts</a></li>
                         <li><a href="#">Manage</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="editUser.xhtml" value="Hello #{userData.currentUser.firstName}">Hello </a></li>
+                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.email}" /></a></li>
+                        <li><a href="editUser.xhtml">Edit User</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
 
-        <h:form>
-            <h1>Add a Job!</h1>
-            <c:if test="#{userData.loggedIn}">
-                <c:if test="#{userData.currentUser.firstName != null}">
-                    <h:outputText value="#{userData.currentUser.firstName}"></h:outputText>
-                </c:if>
-                <c:if test="#{userData.currentUser.firstName == null}">
-                    <h:link value="Hello #{userData.currentUser.email}!" outcome="index" />
-                </c:if>
-            </c:if>
-
-            <p>
-                <h:outputLabel for="pay" value="Amount paying: " />
-                <h:inputText id="pay" value="#{job.pay}" required="true"></h:inputText>      
-            </p>
-
-            <p>
-                <h:outputLabel for="date" value="Scheduled date: " />
-                <h:inputText id="date" value="#{job.scheduledDate}" required="true">
-                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                </h:inputText>      
-            </p>           
-            <h:button class="btn btn-info" id="submit" outcome="JobList" value="Submit Job"></h:button>
-
-            <br />
-
-            <div id ="userAddress">
-                <p><h:outputText value="Address: #{userData.currentUser.address}"/></p>
-                <p><h:outputText value="City: #{userData.currentUser.city}"/></p>
-                <p><h:outputText value="Province: #{userData.currentUser.province}"/></p>
-                <p><h:outputText value="Postal Code: #{userData.currentUser.postalCode}"/></p>
-                <p><h:outputText value="Country: #{userData.currentUser.country}"/></p>
+        <div class="container"> 
+            <div id="userAddress" class="col-md-6">
+                <br />
+                <h2>Job Location</h2>
+                <div><h4>First Name:</h4><h:outputText value="#{userData.currentUser.firstName}"/></div>
+                <div><h4>Last Name:</h4><h:outputText value="#{userData.currentUser.lastName}"/></div>
+                <div><h4>Street Address:</h4><h:outputText value="#{userData.currentUser.address}"/></div>
+                <div><h4>City:</h4><h:outputText value="#{userData.currentUser.city}"/></div>
+                <div><h4>Province:</h4><h:outputText value="#{userData.currentUser.province}"/></div>
+                <div><h4>Postal Code:</h4><h:outputText value="#{userData.currentUser.postalCode}"/></div>
+                <div><h4>Country:</h4><h:outputText value="#{userData.currentUser.country}"/></div>
             </div>
-        </h:form>
+            
+            <h:form class="form-signin col-md-6">
+                <h2 class="form-signin-heading"> Add a Job </h2>
+                <div>
+                    <!-- Pay Rate Input -->
+                    <h:outputLabel for="pay" value="Amount paying: " />
+                    <div>
+                        <h:inputText id="pay" value="#{job.pay}" class="form-control input-md" required="true" ></h:inputText>      
+                    </div>
+
+                    <!-- Scheduled Date Input -->
+                    <h:outputLabel for="date" value="Scheduled date: " />
+                    <div>
+                        <h:inputText id="date" value="#{job.scheduledDate}" class="form-control input-md" required="true" >
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                        </h:inputText>              
+                    </div>
+
+                    <!-- Submit Job Button -->
+                    <div class="btn-group">
+                        <br /><h:button class="btn btn-success" id="submit" outcome="JobList" value="Submit Job"></h:button>
+                    </div>
+                </div>
+            </h:form>      
+
+            
+        </div>
     </h:body>
 </html>
 

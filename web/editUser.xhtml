@@ -6,61 +6,91 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core"
-       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Edit User</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <title>Facelet Title</title>
-        <style>
-            a:hover {
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="css/projectStyling.css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+
     </h:head>
     <h:body>
-         <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
-                    <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
-                        <h:link value="Lawn-B-Gone" outcome="index" class=""/>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="JobList.xhtml">Jobs</a></li>
+                        <li><a href="PostJob.xhtml">Posts</a></li>
+                        <li><a href="#">Manage</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.email}" /></a></li>
+                        <li class="active"><a href="editUser.xhtml">Edit User</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container">
+            <h:form class="form-signin">
+                <h2 class="form-signin-heading"> User Information </h2>
+
+                <div>
+                    <h:outputLabel for="firstName" class="control-label" value="First Name:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.firstName}" class="form-control input-md" required="true" />
                     </div>
-                    <div class="col-md-1">
-                        <h:link value="Jobs" outcome="JobList" class="" style="color: white;" />
+
+                    <h:outputLabel for="lastName" class="control-label" value="Last Name:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.lastName}" class="form-control input-md" required="true" />
                     </div>
-                    <div class="col-md-1">
-                        <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
+
+                    <h:outputLabel for="address" class="control-label" value="Street Address:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.address}" class="form-control input-md" required="true" />
                     </div>
-                    <div class="col-md-4 col-md-offset-4" style="text-align: right;" >
-                        <c:if test="#{!userData.loggedIn}">
-                            <h:link value="Login" outcome="Login" style="color: white;"/>
-                        </c:if>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="index" style="color: white;"/>
-                            </c:if>
-                            <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="index" style="color: white;" />
-                            </c:if>
-                        </c:if>
+
+                    <h:outputLabel for="city" class="control-label" value="City:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.city}" class="form-control input-md" required="true" />
+                    </div>
+
+                    <h:outputLabel for="province" class="control-label" value="Province:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.province}" class="form-control input-md" required="true" />
+                    </div>
+
+                    <h:outputLabel for="postalCode" class="control-label" value="Postal Code:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.postalCode}" class="form-control input-md" required="true" />
+                    </div>
+
+                    <h:outputLabel for="country" class="control-label" value="Country:" />
+                    <div>
+                        <h:inputText value="#{userData.currentUser.country}" class="form-control input-md" required="true" />
+                    </div>
+
+                    <div class="btn-group">
+                        <br /><h:commandButton class="btn btn-success" value="Save" action="#{userData.saveUser}"/>
                     </div>
                 </div>
-            </div>
+            </h:form>
         </div>
-        <h:form>
-            <p>First Name: <h:inputText value="#{userData.currentUser.firstName}"/></p>
-            <p>Last Name: <h:inputText value="#{userData.currentUser.lastName}" /></p>
-            <p>Address: <h:inputText value="#{userData.currentUser.address}" /></p>
-            <p>City: <h:inputText value="#{userData.currentUser.city}" /></p>
-            <p>Province: <h:inputText value="#{userData.currentUser.province}" /></p>
-            <p>Country: <h:inputText value="#{userData.currentUser.country}"/></p>
-            <p>Postal Code: <h:inputText value="#{userData.currentUser.postalCode}" /></p>
-            <h:commandButton value="Save" action="#{userData.saveUser}"/>
-        </h:form>
     </h:body>
 </html>

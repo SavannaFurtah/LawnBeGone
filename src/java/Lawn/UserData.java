@@ -65,7 +65,7 @@ public class UserData {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
             loggedIn = true;
-            return "HeaderBar";
+            return "JobList";
         }
         facesContext.addMessage("loginForm", new FacesMessage("Username or Password is incorrect."));
         return null;
@@ -162,7 +162,7 @@ public class UserData {
                 pstmt.setString(7,currentUser.getPostalCode());
                 pstmt.setInt(8,currentUser.getId());
                 pstmt.executeUpdate();
-                return "HeaderBar";
+                return "JobList";
             }
             
         } catch (SQLException ex) {
