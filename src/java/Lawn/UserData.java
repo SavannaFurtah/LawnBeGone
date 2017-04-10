@@ -39,6 +39,10 @@ public class UserData {
         
     }
     
+    /**
+     * Creates a user in the database
+     * @return The page to redirect to.
+     */
     public String createUser() {
         currentUser.setHashedPassword(hashPass(password));
         try (Connection conn = (Connection) DBUtils.getConnection()) {
@@ -58,6 +62,10 @@ public class UserData {
         }
     }
     
+    /**
+     * Log a user in, produces an error if necessary
+     * @return Redirect to index on success, stay on page if failure
+     */
     public String loginUser() {
         currentUser.setHashedPassword(hashPass(password));
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -69,6 +77,11 @@ public class UserData {
         return null;
     }
     
+    
+    /**
+     * Logs user out of the site
+     * @return Redirect to index
+     */
     public String logoutUser() {
         currentUser = new User();
         loggedIn = true;
@@ -99,6 +112,8 @@ public class UserData {
             return null;
         }
     }
+    
+    //Getters & Setters
 
     public User getCurrentUser() {
         return currentUser;
