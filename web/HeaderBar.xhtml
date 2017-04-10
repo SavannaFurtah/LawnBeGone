@@ -16,7 +16,8 @@
         </style>
     </h:head>
     <h:body>
-        <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
+        
+    <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
             <div class="container">
                 <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
                     <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
@@ -28,7 +29,10 @@
                     <div class="col-md-1">
                         <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
                     </div>
-                    <div class="col-md-4 col-md-offset-4" style="text-align: right;" >
+                    <div class="col-md-1">
+                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
+                    </div>
+                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
                         <c:if test="#{!userData.loggedIn}">
                             <h:link value="Login" outcome="Login" style="color: white;"/>
                         </c:if>

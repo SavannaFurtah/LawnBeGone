@@ -2,22 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:head>
+   <h:head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <title>Add a Job</title>
+        <title>Facelet Title</title>
         <style>
             a:hover {
                 font-weight: bold;
                 text-decoration: none;
             }
         </style>
-    </h:head>     
+    </h:head>
     <h:body>
-        <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
+       <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
             <div class="container">
                 <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
                     <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
@@ -48,45 +47,6 @@
                 </div>
             </div>
         </div>
-
-        <h:form>
-            <h1>Add a Job!</h1>
-            <c:if test="#{userData.loggedIn}">
-                <c:if test="#{userData.currentUser.firstName != null}">
-                    <h:outputText value="#{userData.currentUser.firstName}"></h:outputText>
-                </c:if>
-                <c:if test="#{userData.currentUser.firstName == null}">
-                    <h:link value="Hello #{userData.currentUser.email}!" outcome="index" />
-                </c:if>
-            </c:if>
-            
-            <p>
-                <h:outputLabel for="title" value="Title: " />
-                <h:inputText id="title" value="#{job.title}" required="true"></h:inputText>      
-            </p>
-            
-            <p>
-                <h:outputLabel for="description" value="Description: " />
-                <h:inputTextarea id="description" value="#{job.description}" required="true"></h:inputTextarea>      
-            </p>
-            
-            <p>
-                <h:outputLabel for="pay" value="Amount paying: " />
-                <h:inputText id="pay" value="#{job.pay}" required="true"></h:inputText>      
-            </p>
-                 
-            <br />
-
-            <div id ="userAddress">
-                <p><h:outputText value="Address: #{userData.currentUser.address}"/></p>
-                <p><h:outputText value="City: #{userData.currentUser.city}"/></p>
-                <p><h:outputText value="Province: #{userData.currentUser.province}"/></p>
-                <p><h:outputText value="Postal Code: #{userData.currentUser.postalCode}"/></p>
-                <p><h:outputText value="Country: #{userData.currentUser.country}"/></p>
-            </div> 
-            
-            <h:button class="btn btn-info" id="submit" outcome="JobList" value="Submit Job"></h:button>
-        </h:form>
     </h:body>
 </html>
 

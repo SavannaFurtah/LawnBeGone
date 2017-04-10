@@ -28,7 +28,10 @@
                     <div class="col-md-1">
                         <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
                     </div>
-                    <div class="col-md-4 col-md-offset-4" style="text-align: right;" >
+                    <div class="col-md-1">
+                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
+                    </div>
+                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
                         <c:if test="#{!userData.loggedIn}">
                             <h:link value="Login" outcome="Login" style="color: white;"/>
                         </c:if>
@@ -44,6 +47,27 @@
                 </div>
             </div>
         </div>
+        
+        <h:dataTable value="#{jobData.guestbookPosts}" var="post">
+            <h:column>
+                #{job.id}
+            </h:column>
+            <h:column>
+                #{job.pay}
+            </h:column>
+            <h:column>
+                #{job.title}
+            </h:column>
+            <h:column>
+                #{job.description}
+            </h:column>
+            <h:column>
+                #{job.OwnerPostalCode}
+            </h:column>
+            <h:column>
+                #{job.status}
+            </h:column>
+        </h:dataTable>       
     </h:body>
 </html>
 
