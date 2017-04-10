@@ -34,10 +34,10 @@
                         </c:if>
                         <c:if test="#{userData.loggedIn}">
                             <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="index" style="color: white;"/>
+                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
                             </c:if>
                             <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="index" style="color: white;" />
+                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
                             </c:if>
                         </c:if>
                     </div>
