@@ -48,6 +48,7 @@ public class UserDataTest {
         String result = instance.createUser();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
+        //I have no idea what I'm doing....
         fail("The test case is a prototype.");
     }
 
