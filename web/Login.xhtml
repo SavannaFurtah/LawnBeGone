@@ -12,50 +12,34 @@ and open the template in the editor.
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"></link>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        
+
     </h:head>
     <h:body>
         <div class="container">
-            <h1>Login</h1>
-            <h:form id="loginForm">
+            <h:form class="form-signin">
+                <h1 class="form-signin-heading"> Login </h1>
                 <div class="row">
-                    <div class="col-md-1">
+                    <div>
                         <p>
-                        <h:message id="error" for="loginForm" class="label label-danger" />
+                            <h:message id="error" for="loginForm" class="label label-danger" />
                         </p>
                     </div>
                 </div>
-                <!-- Text input-->
-                <div class="row">
-
-                    
-                    <h:outputLabel for="username" class="col-md-1 control-label" value="Email:" />  
-                    <div class="col-md-4">
-                        <h:inputText id="username" value="#{userData.currentUser.email}" class="form-control input-md" required="true" />
-                    </div>
-                    <div class="col-md-7">
-
-                    </div>
+                <!-- Email input-->
+                <h:outputLabel for="username" class="control-label" value="Email:" />  
+                <div>
+                    <h:inputText id="username" value="#{userData.currentUser.email}" class="form-control input-md" required="true" />
                 </div>
-
-                <!-- Text input-->
-                <div class="row">
-                    <h:outputLabel for="password" class="col-md-1 control-label" value="Password:" />  
-                    <div class="col-md-4">
-                        <h:inputSecret id="password" value="#{userData.password}" class="form-control input-md" required="true" />
-                    </div>
-                    <div class="col-md-7">
-
-                    </div>
+                <br/>
+                <!-- Password input-->
+                <h:outputLabel for="password" class="control-label" value="Password:" />  
+                <div>
+                    <h:inputSecret id="password" value="#{userData.password}" class="form-control input-md" required="true" />
                 </div>
-
-                <div class="row">
-                    <div class="col-md-1">
-                         <h:commandButton class="btn btn-info" action="#{userData.loginUser()}" value="Login" />
-                    </div>
+                <br />
+                <div class="col-md-12">
+                    <h:commandButton class="btn btn-success" action="#{userData.loginUser()}" value="Login" />
                 </div>
-
-                
             </h:form>
         </div>
     </h:body>
