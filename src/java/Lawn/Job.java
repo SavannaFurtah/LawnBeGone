@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Job {
     private int id;
     private User owner, cutter;
-    private int pay;
+    private double pay;
     private Date scheduledDate;
     private String status;
 
@@ -50,11 +50,11 @@ public class Job {
         this.cutter = cutter;
     }
 
-    public int getPay() {
+    public double getPay() {
         return pay;
     }
 
-    public void setPay(int pay) {
+    public void setPay(double pay) {
         this.pay = pay;
     }
 
