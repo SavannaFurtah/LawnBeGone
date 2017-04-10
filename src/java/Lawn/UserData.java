@@ -72,6 +72,7 @@ public class UserData {
         currentUser.setHashedPassword(hashPass(password));
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
+            currentUser = ul.getUserByEmail(currentUser.getEmail());
             loggedIn = true;
             return "HeaderBar";
         }

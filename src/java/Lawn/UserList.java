@@ -44,6 +44,19 @@ public class UserList {
         return false;
     }
     
+    /**
+     * Looks through the list of users to find the user that matches it
+     * @param email the email address to look for (case insensitive)
+     * @return The entire User object that matches the email, null if not found
+     */
+    public User getUserByEmail(String email) {
+        for (User u : userList) {
+            if (email.toLowerCase().equals(u.getEmail().toLowerCase()))
+                return u;
+        }
+        return null;
+    }
+    
     public boolean verifyCredentials(String username, String passHash) {
         for (User u : userList) {
             if (username.toLowerCase().equals(u.getEmail().toLowerCase()))
