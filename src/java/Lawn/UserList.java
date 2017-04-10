@@ -29,6 +29,16 @@ public class UserList {
 
     public UserList() {
     }
+    
+    /**
+     * This method runs when the server is up and running, ensuring that
+     * it only runs a single time. Loads up the user list into memory.
+     */
+    @PostConstruct
+    void init() {
+        System.out.println("UserList init complete, refreshing user list.");
+        refreshUserList();
+    }
 
     /**
      * Looks through the list of users to find if the email matches
@@ -104,19 +114,5 @@ public class UserList {
     public List<User> getUserList() {
         return userList;
     }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
     
-    /**
-     * This method runs when the server is up and running, ensuring that
-     * it only runs a single time. Loads up the user list into memory.
-     */
-    @PostConstruct
-    void init() {
-        System.out.println("UserList init complete, refreshing user list.");
-        refreshUserList();
-    }
-
 }

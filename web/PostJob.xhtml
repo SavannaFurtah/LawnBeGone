@@ -46,8 +46,9 @@
             </div>
         </div>
 
-        <h:form>
+        <h:form id="postJobForm">
             <h1>Add a Job!</h1>
+            <h:message id="error" for="postJobForm" class="label label-danger" />
             <c:if test="#{userData.loggedIn}">
                 <c:if test="#{userData.currentUser.firstName != null}">
                     <h:outputText value="#{userData.currentUser.firstName}"></h:outputText>
@@ -58,27 +59,20 @@
             </c:if>
             
             <p>
-                <h:outputLabel for="pay" value="Amount paying: " />
-                <h:inputText id="pay" value="#{job.pay}" required="true"></h:inputText>      
+                <h:outputLabel for="title" value="Job Title: " />
+                <h:inputText id="title" value="#{jobData.currentJob.title}" required="true"></h:inputText>
             </p>
-           
             <p>
-                <h:outputLabel for="date" value="Scheduled date: " />
-                <h:inputText id="date" value="#{job.scheduledDate}" required="true">
-                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                </h:inputText>      
-            </p>           
-            <h:button class="btn btn-info" id="submit" outcome="JobList" value="Submit Job"></h:button>
-           
-            <br />
+                <h:outputLabel for="pay" value="Job Pay: " />
+                <h:inputText id="pay" value="#{jobData.currentJob.pay}" required="true"></h:inputText>      
+            </p>
+            <p>
+                <h:outputLabel for="desc" value="Job Description: " />
+                <h:inputTextarea id="desc" value="#{jobData.currentJob.description}"></h:inputTextarea>
+            </p>
 
-            <div id ="userAddress">
-                <p><h:outputText value="Address: #{userData.currentUser.address}"/></p>
-                <p><h:outputText value="City: #{userData.currentUser.city}"/></p>
-                <p><h:outputText value="Province: #{userData.currentUser.province}"/></p>
-                <p><h:outputText value="Postal Code: #{userData.currentUser.postalCode}"/></p>
-                <p><h:outputText value="Country: #{userData.currentUser.country}"/></p>
-            </div>
+            <h:commandButton class="btn btn-info" id="submit" action="#{jobData.createJob(userData.currentUser.id)}"
+                             value="Submit Job"></h:commandButton>
         </h:form>
     </h:body>
 </html>

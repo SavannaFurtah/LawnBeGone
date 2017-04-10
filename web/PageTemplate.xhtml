@@ -17,14 +17,11 @@
         </style>
     </h:head>
     <h:body>
-        <!-- THIS IS HOW PAGES SHOULD BE DONE -->
-        <ui:composition template="PageTemplate.xhtml">
-            <ui:define name="content">
-                <div class="container">
-                    Test Content Please Ignore
-                </div>
-            </ui:define>
-        </ui:composition>
+        <ui:insert name="top">
+            <ui:include src="HeaderBar.xhtml" />
+        </ui:insert>
+        <ui:insert name="content" />
+       
     </h:body>
 </html>
 
