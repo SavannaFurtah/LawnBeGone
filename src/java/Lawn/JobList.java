@@ -65,8 +65,16 @@ public class JobList {
         }
     }
     
-    public void addToJobList() {
-        
+    public Job getJobById(int targetId) {
+        for (Job j : jobList) {
+            if (j.getId() == targetId)
+                return j;
+        }
+        return null;
+    }
+    
+    public void removeJobById(int targetId) {
+        jobList.remove(this.getJobById(targetId));
     }
 
     public List<Job> getJobList() {
