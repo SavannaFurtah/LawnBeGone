@@ -8,11 +8,16 @@
     </h:head>
     <h:body>
         <h1>Confirm Job</h1>
-        <h1>#{jobData.currentJob.title}</h1>
-        <p>#{jobData.currentJob.description}</p>
-        <p>#{jobData.currentJob.pay}</p>
-        <p>#{jobData.jobOwner.id}</p>
-        <p>#{jobData.jobOwner.address }</p>
+        <h1>Job Title: #{jobData.currentJob.title}</h1>
+        <p>Job Description: #{jobData.currentJob.description}</p>
+        <p>Job Pay: #{jobData.currentJob.pay}</p>
+        
+        <p>Lawn owners first name: #{userList.getById(jobData.currentJob.owner).firstName}</p>
+        <p> Lawn owners address: #{userList.getById(jobData.currentJob.owner).address} #{userList.getById(jobData.currentJob.owner).city} #{userList.getById(jobData.currentJob.owner).postalCode} #{userList.getById(jobData.currentJob.owner).country}</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        
         <h:form>
        <p>
                 <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />

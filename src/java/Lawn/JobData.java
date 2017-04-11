@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -30,11 +32,28 @@ import javax.inject.Named;
 public class JobData {
 
     private Job currentJob = new Job();
+    
+    private User currentOwner = new User();
+    
+    private User jobOwner = new User();
+    
+    private List<User> users = new ArrayList<>();
+    
     @Inject
     private JobList jl;
     
     public JobData() {
         
+    }
+    
+     public User getById(int id){
+      for (User u : users)
+          if(u.getId() == id){
+              return u;
+          }
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+      facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
+      return null;
     }
     
     
@@ -65,6 +84,8 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
+    
+
 
     /**
      * Edits a job to assign a User id as the person who will be performing the
@@ -76,9 +97,11 @@ public class JobData {
      * @return Redirects to the job management page
      * @throws ParseException 
      */
-    public String assignJobToCutter(int jobId, int cutterID, String date, String time) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy'T'kk:mm:ss");
-        Date scheduledDate = (Date) sdf.parse(date + "T" + time);
+    public String assignJobToCutter(int jobId, int cutterID, String date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        Date scheduledDate = (Date) sdf.parse(date);
+       
+        
         try {
             Connection conn = DBUtils.getConnection();
             String sql = "UPDATE jobs SET cutterId = ?, scheduledDate = ?, status = 'Scheduled' WHERE id = ?";
@@ -153,5 +176,11 @@ public class JobData {
         this.currentJob = currentJob;
     }
 
+    public String viewJob(Job job, int owner){
+        currentJob = job;
+        currentJob.setOwner(owner);     
+        return"SelectJob";
+    }
     
+
 }

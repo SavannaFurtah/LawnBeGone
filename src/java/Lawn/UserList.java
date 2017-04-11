@@ -54,6 +54,14 @@ public class UserList {
         return false;
     }
     
+    public User getById(int id){
+      for (User u : userList)
+          if(id == u.getId()){
+              return u;
+          }
+      return null;
+    }
+    
     /**
      * Looks through the list of users to find the user that matches it
      * @param email the email address to look for (case insensitive)

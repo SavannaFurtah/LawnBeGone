@@ -55,20 +55,7 @@ public class JobDataTest {
     /**
      * Test of assignJobToCutter method, of class JobData.
      */
-    @Test
-    public void testAssignJobToCutter() throws Exception {
-        System.out.println("assignJobToCutter");
-        int jobId = 0;
-        int cutterID = 0;
-        String date = "";
-        String time = "";
-        JobData instance = new JobData();
-        String expResult = "";
-        String result = instance.assignJobToCutter(jobId, cutterID, date, time);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of deleteJob method, of class JobData.

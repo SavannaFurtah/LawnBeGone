@@ -28,7 +28,7 @@
             <h:dataTable class="table" value="#{jobList.jobList}" var="j">
                 <h:column>
                     <f:facet name="header">Title</f:facet>
-                        #{j.title}
+                        <h:commandLink action="#{jobData.viewJob(j, j.owner)}">#{j.title} </h:commandLink>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Pay</f:facet>
@@ -39,8 +39,13 @@
                         #{j.description}
                 </h:column>
                 <h:column>
-                    <h:commandButton action=""#{jobList.deleteJob} value="Delete"></h:commandButton>
-                    <h:commandButton></h:commandButton>
+                    <f:facet name="header">address</f:facet>
+                       #{userData.getById(j.owner).address}
+                </h:column>
+                
+                <h:column>
+                    <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
+                    
                 </h:column>
             </h:dataTable>
         </h:form>

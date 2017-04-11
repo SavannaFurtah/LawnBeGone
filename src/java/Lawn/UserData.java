@@ -11,6 +11,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -29,6 +31,8 @@ import javax.inject.Named;
 @ManagedBean
 public class UserData {
     
+    private List<User> users = new ArrayList<>();
+    
     private User currentUser = new User();
     private String password;
     private int nextUserId;
@@ -39,6 +43,21 @@ public class UserData {
    
     public UserData() {
         
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+    public User getById(int id){
+      for (User u : users)
+          if(u.getId() == id){
+              return u;
+          }
+      return null;
     }
     
     /**
