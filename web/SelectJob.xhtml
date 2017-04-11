@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>Confirm Job</h1>
+        <h1>#{jobData.currentJob.title}</h1>
+        <p>#{jobData.currentJob.description}</p>
+        <p>#{jobData.currentJob.pay}</p>
+        <p>#{jobData.jobOwner.id}</p>
+        <p>#{jobData.jobOwner.address }</p>
+        <h:form>
+       <p>
+                <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />
+                <h:inputText id="date" value="#{jobData.currentJob.scheduledDate}" required="true">
+                 <f:convertDateTime pattern="dd/mm/yyyy" /></h:inputText>      
+            </p>
+        <h:commandButton class="btn btn-info" id="submit" action="#{jobData.assignJobToCutter(jobData.currentJob.id, userData.currentUser.id,jobData.currentJob.scheduledDate)}"
+                             value="Submit Job"></h:commandButton>
+        </h:form>
+        
+    </h:body>
+</html>
+
