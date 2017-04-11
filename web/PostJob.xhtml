@@ -29,16 +29,19 @@
                     <div class="col-md-1">
                         <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
                     </div>
-                    <div class="col-md-4 col-md-offset-4" style="text-align: right;" >
+                    <div class="col-md-1">
+                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
+                    </div>
+                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
                         <c:if test="#{!userData.loggedIn}">
                             <h:link value="Login" outcome="Login" style="color: white;"/>
                         </c:if>
                         <c:if test="#{userData.loggedIn}">
                             <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="index" style="color: white;"/>
+                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
                             </c:if>
                             <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="index" style="color: white;" />
+                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
                             </c:if>
                         </c:if>
                     </div>
