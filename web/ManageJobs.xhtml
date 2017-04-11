@@ -4,65 +4,60 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <h:head>
+    <h:head>
+        <title>Manage Jobs</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <title>Facelet Title</title>
-        <style>
-            a:hover {
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="css/projectStyling.css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
     </h:head>
     <h:body>
-       <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
-                    <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
-                        <h:link value="Lawn-B-Gone" outcome="index" class=""/>
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Jobs" outcome="JobList" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
-                        <c:if test="#{!userData.loggedIn}">
-                            <h:link value="Login" outcome="Login" style="color: white;"/>
-                        </c:if>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
-                            </c:if>
-                            <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
-                            </c:if>
-                        </c:if>
-                    </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Lawn-Be-Gone</a>
                 </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="ManageJobs.xhtml">Manage Jobs</a></li>
+                        <li><a href="JobList.xhtml">Job List</a></li>
+                        <li><a href="PostJob.xhtml">Post Jobs</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" /></a></li>
+                        <li><a href="editUser.xhtml">Edit User</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </nav>
+
+        <div class="container">
+            <h:form class="table1">
+                <h2 class="form-signin-heading"> Manage Jobs </h2>
+                <h:dataTable class="table table-striped" value="#{jobsData.job}" var="job">                  >
+                    <h:column>
+                        <f:facet name="header">Job Id</f:facet>
+                            #{job.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Owner Id</f:facet>
+                            #{job.ownerId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Status</f:facet>
+                            #{job.status}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
         </div>
-        <h:form>
-            <h:dataTable class="table" value="#{jobsData.job}" var="j">
-                <h:column>
-                    <f:facet name="header">Job Id</f:facet>
-                        #{j.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Owner Id</f:facet>
-                        #{j.ownerId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Status</f:facet>
-                        #{j.status}
-                </h:column>
-        </h:form>
     </h:body>
 </html>
 

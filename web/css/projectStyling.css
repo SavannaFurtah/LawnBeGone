@@ -82,3 +82,10 @@ body {
 .navbar-static-top {
   margin-bottom: 19px;
 }
+
+/* Table Styling for Jobs and ManageJobs Pages */
+.table1 {
+  max-width: 960px;
+  padding: 15px;
+  margin: 0 auto;
+}
