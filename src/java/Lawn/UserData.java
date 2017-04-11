@@ -59,7 +59,6 @@ public class UserData {
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, "Test", ex);
             currentUser = new User();
-            
             return "UserRegistration";
         }
     }
@@ -74,7 +73,7 @@ public class UserData {
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
             currentUser = ul.getUserByEmail(currentUser.getEmail());
             loggedIn = true;
-            return "HeaderBar";
+            return "ManageJobs";
         }
         facesContext.addMessage("loginForm", new FacesMessage("Username or Password is incorrect."));
         return null;
@@ -178,9 +177,8 @@ public class UserData {
                 pstmt.setString(7,currentUser.getPostalCode());
                 pstmt.setInt(8,currentUser.getId());
                 pstmt.executeUpdate();
-                return "HeaderBar";
-            }
-            
+                return "ManageJobs";
+            }   
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
         }
