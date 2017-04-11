@@ -182,7 +182,7 @@ public class UserData {
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "login";
+        return "Login";
     }
     
 }
