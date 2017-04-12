@@ -30,22 +30,22 @@ import javax.inject.Named;
 public class JobData {
 
     private Job currentJob = new Job();
-    
+
     private User currentOwner = new User();
-    
+
     private User jobOwner = new User();
-    
+
     @Inject
     private JobList jl;
-    
+
     public JobData() {
-        
+
     }
-    
-    
+
     /**
      * Takes info from creating a job, adds it to the database, and adds it to
      * the job list for browsing.
+     *
      * @param creator The User id of the job poster
      * @return A page redirect to JobList on success, error message on failure
      */
@@ -74,12 +74,14 @@ public class JobData {
     /**
      * Edits a job to assign a User id as the person who will be performing the
      * job and adding the due date.
+     *
      * @param jobId The Job ID to be edited
      * @param cutterID The user being assigned to the job
      * @param date The day, month, and year scheduled (dd/mm/yy)
-     * @param time The time scheduled (hh:mm:ss with hh being 24 hour time, 1-24)
+     * @param time The time scheduled (hh:mm:ss with hh being 24 hour time,
+     * 1-24)
      * @return Redirects to the job management page
-     * @throws ParseException 
+     * @throws ParseException
      */
     public String assignJobToCutter(int jobId, int cutterID, String date) throws ParseException {
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy'T'kk:mm:ss");
@@ -103,9 +105,10 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
-    
+
     /**
      * Deletes a job from the list and database
+     *
      * @param jobId The job ID to be removed
      * @return a redirect to the Job List
      */
@@ -125,9 +128,10 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
-    
+
     /**
      * Removes the cutter from the specified job.
+     *
      * @param jobId The job ID to remove a cutter on
      * @return A redirect to the job list
      */
@@ -139,8 +143,8 @@ public class JobData {
             pstmt.setInt(1, jobId);
             pstmt.executeUpdate();
             Job updatedJob = jl.getJobById(jobId);
-          //  updatedJob.setCutter(0);
-           // updatedJob.setScheduledDate(null);
+            //  updatedJob.setCutter(0);
+            // updatedJob.setScheduledDate(null);
             return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,43 +153,77 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
-   
+
+    /**
+     * editJob method takes the user id and edits any job that they created
+     * returns the changes
+     *
+     * @param jobId
+     * @return
+     */
     public String editJob(int jobId) {
-        try{
+        try {
             Connection conn = DBUtils.getConnection();
             String sql = "UPDATE jobs SET title = ?, description = ?, pay = ?, status = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, currentJob.getTitle());
-            pstmt.setString(2,currentJob.getDescription());
-            pstmt.setDouble(3,currentJob.getPay());
-            pstmt.setString(4,currentJob.getStatus());
-            pstmt.setInt(5,currentJob.getId());
+            pstmt.setString(2, currentJob.getDescription());
+            pstmt.setDouble(3, currentJob.getPay());
+            pstmt.setString(4, currentJob.getStatus());
+            pstmt.setInt(5, currentJob.getId());
             pstmt.executeUpdate();
             return "ManageJobs";
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
         }
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error"));
-        return null;  
+        return null;
     }
-    
+
+    /**
+     * getCurrentJob method gets the current job and returns the currentJob
+     *
+     * @return
+     */
     public Job getCurrentJob() {
         return currentJob;
     }
 
+    /**
+     * setCurrentJob method sets the job to the currentJob
+     *
+     * @param currentJob
+     */
     public void setCurrentJob(Job currentJob) {
         this.currentJob = currentJob;
     }
 
-    public String viewJob(Job job, int owner){
+    /**
+     * viewjob method views the currentJob with the currentJob owner by their id
+     * and returns the owners created job
+     *
+     * @param job
+     * @param owner
+     * @return
+     */
+    public String viewJob(Job job, int owner) {
         currentJob = job;
-        currentJob.setOwner(owner);     
-        return"SelectJob";
+        currentJob.setOwner(owner);
+        return "SelectJob";
     }
-    public String editViewJob(Job job, int owner){
+
+    /**
+     * editViewJob method edits the currentJob owned by the particular owner and
+     * returns the edited job
+     *
+     * @param job
+     * @param owner
+     * @return
+     */
+    public String editViewJob(Job job, int owner) {
         currentJob = job;
-        currentJob.setOwner(owner);     
-        return"EditJob";
+        currentJob.setOwner(owner);
+        return "EditJob";
     }
 }
