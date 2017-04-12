@@ -6,6 +6,7 @@
 package Lawn;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,7 +42,7 @@ public class JobList {
         refreshJobList();
     }
     
-    public void refreshJobList() {
+    public String refreshJobList() {
         try (Connection conn = (Connection) DBUtils.getConnection()) {
             String sql = "SELECT * FROM jobs";
             jobList = new ArrayList<>();
@@ -58,11 +59,71 @@ public class JobList {
                         rs.getString("description"),
                         rs.getString("status"));
                 jobList.add(j);
+                
+            }
+            return "JobList";
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            jobList = new ArrayList<>();
+        }
+        return null;
+    }
+    
+    public String sortByOwnerId(int id) {
+        try {
+            Connection conn = (Connection) DBUtils.getConnection();
+            String sql = "SELECT * FROM jobs WHERE ownerId = ? OR cutterId = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);           
+            pstmt.setInt(2, id);
+            jobList = new ArrayList<>();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Job j = new Job(
+                        rs.getInt("id"),
+                        rs.getInt("ownerId"),
+                        rs.getInt("cutterId"),
+                        rs.getDouble("pay"),
+                        rs.getString("scheduledDate"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getString("status"));
+                jobList.add(j);            
+            }
+            return "ManageJobs";
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            jobList = new ArrayList<>();
+        }
+        return "index";
+    }
+    
+    public String sortByCutterId(int id) {
+        try {
+            Connection conn = (Connection) DBUtils.getConnection();
+            String sql = "SELECT * FROM jobs WHERE cutterId = ? OR owner";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            jobList = new ArrayList<>();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Job j = new Job(
+                        rs.getInt("id"),
+                        rs.getInt("ownerId"),
+                        rs.getInt("cutterId"),
+                        rs.getDouble("pay"),
+                        rs.getString("scheduledDate"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getString("status"));
+                jobList.add(j);
+                return "ManageJobs";
             }
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
         }
+        return "index";
     }
     
     public Job getJobById(int targetId) {

@@ -92,7 +92,7 @@ public class UserData {
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
             currentUser = ul.getUserByEmail(currentUser.getEmail());
             loggedIn = true;
-            return "ManageJobs";
+            return "JobList";
         }
         facesContext.addMessage("loginForm", new FacesMessage("Username or Password is incorrect."));
         return null;
@@ -196,7 +196,7 @@ public class UserData {
                 pstmt.setString(7,currentUser.getPostalCode());
                 pstmt.setInt(8,currentUser.getId());
                 pstmt.executeUpdate();
-                return "ManageJobs";
+                return "JobList";
             }   
         } catch (SQLException ex) {
             Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
