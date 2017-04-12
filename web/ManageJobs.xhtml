@@ -49,19 +49,32 @@
             </div>
         </div>
         <h:form>
-            <h:dataTable class="table" value="#{jobsData.job}" var="j">
+            <h:dataTable class="table" value="#{jobList.jobList}" var="j">
                 <h:column>
                     <f:facet name="header">Job Id</f:facet>
                         #{j.id}
                 </h:column>
                 <h:column>
                     <f:facet name="header"> Owner Id</f:facet>
-                        #{j.ownerId}
+                      #{job.ownerId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                       #{job.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                        #{job.description}
                 </h:column>
                 <h:column>
                     <f:facet name="header"> Status</f:facet>
-                        #{j.status}
+                        #{job.status}
                 </h:column>
+                <h:column>
+                <h:commandButton action="#{jobData.editJob(j.id)}" value = "Edit"></h:commandButton>
+                <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete"></h:commandButton>
+                </h:column>
+            </h:dataTable>
         </h:form>
     </h:body>
 </html>
