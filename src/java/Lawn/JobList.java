@@ -33,24 +33,38 @@ public class JobList {
         return jobList2;
     }
 
+    /**
+     * setJobList2 sets the second job list
+     *
+     * @param jobList2
+     */
     public void setJobList2(List<Job> jobList2) {
         this.jobList2 = jobList2;
     }
-    
-    public JobList() {
-        
-    }
-    
+
     /**
-     * This method runs when the server is up and running, ensuring that
-     * it only runs a single time. Loads up the job list into memory.
+     * empty constructor
+     */
+    public JobList() {
+
+    }
+
+    /**
+     * This method runs when the server is up and running, ensuring that it only
+     * runs a single time. Loads up the job list into memory.
      */
     @PostConstruct
     void init() {
         System.out.println("JobList init complete, refreshing job list.");
         refreshJobList();
     }
-    
+
+    /**
+     * refreshJobList method refreshes the jobList in the database and returns
+     * the jobList from the database
+     *
+     * @return
+     */
     public String refreshJobList() {
         try (Connection conn = (Connection) DBUtils.getConnection()) {
             String sql = "SELECT * FROM jobs";
@@ -68,7 +82,7 @@ public class JobList {
                         rs.getString("description"),
                         rs.getString("status"));
                 jobList.add(j);
-                
+
             }
             return "JobList";
         } catch (SQLException ex) {
@@ -77,19 +91,34 @@ public class JobList {
         }
         return null;
     }
-        
+
+    /**
+     * methodThree method gets the jobs by owners and job cutters by id and
+     * returns them to the page
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public String methodThree(int id) throws SQLException {
-    sortByOwnerId(id);
-    sortByCutterId(id);
-    return "ManageJobs";
-}
-    
+        sortByOwnerId(id);
+        sortByCutterId(id);
+        return "ManageJobs";
+    }
+
+    /**
+     * sortByOwnerId method accepts the id and selects the jobs from the
+     * database and sorts the list of jobs
+     *
+     * @param id
+     * @throws SQLException
+     */
     public void sortByOwnerId(int id) throws SQLException {
         try {
             Connection conn = (Connection) DBUtils.getConnection();
             String sql = "SELECT * FROM jobs WHERE ownerId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);            
+            pstmt.setInt(1, id);
             jobList = new ArrayList<>();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -102,20 +131,27 @@ public class JobList {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));
-                jobList.add(j);    
-            }   
+                jobList.add(j);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
         }
     }
-    
-     public void sortByCutterId(int id) throws SQLException {
+
+    /**
+     * sortByCutterId method accepts the id and returns the list of jobs
+     * accepted by the cutter
+     *
+     * @param id
+     * @throws SQLException
+     */
+    public void sortByCutterId(int id) throws SQLException {
         try {
             Connection conn = (Connection) DBUtils.getConnection();
             String sql = "SELECT * FROM jobs WHERE cutterId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);          
+            pstmt.setInt(1, id);
             jobList2 = new ArrayList<>();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -129,36 +165,54 @@ public class JobList {
                         rs.getString("description"),
                         rs.getString("status"));
                 jobList2.add(j2);
-            } 
+            }
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList2 = new ArrayList<>();
         }
     }
-    
+
+    /**
+     * getJobById method accepts the targetId and returns it to the jobList
+     *
+     * @param targetId
+     * @return
+     */
     public Job getJobById(int targetId) {
         for (Job j : jobList) {
-            System.out.println("Compared " + j.getId() + " with target " + targetId);
             if (j.getId() == targetId) {
-                System.out.println("Returned job " + j.getId());
                 return j;
             }
         }
         System.out.println("Didn't find a job with that ID oh boy here comes a null pointer exception");
         return null;
     }
-    
+
+    /**
+     * removeJobById method removes the job by the targetId from the list
+     *
+     * @param targetId
+     */
     public void removeJobById(int targetId) {
         jobList.remove(this.getJobById(targetId));
     }
 
+    /**
+     * the getJobList method gets the list of jobs and returns it
+     *
+     * @return
+     */
     public List<Job> getJobList() {
         return jobList;
     }
 
+    /**
+     * setJobList method sets the jobList accepting
+     *
+     * @param jobList
+     */
     public void setJobList(List<Job> jobList) {
         this.jobList = jobList;
     }
-    
-    
+
 }
