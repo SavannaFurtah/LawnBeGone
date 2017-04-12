@@ -28,7 +28,13 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="JobList.xhtml">Job List</a></li>
-                        <li><a href="ManageJobs.xhtml">Manage Jobs</a></li>
+                        <li> <h:form>
+                        <c:if test="#{userData.loggedIn}">
+                            <c:if test="#{userData.currentUser.id != null}">
+                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="Manage Page" ></h:commandLink>
+                            </c:if>
+                            </c:if>
+                        </h:form></li>
                         <li><a href="PostJob.xhtml">Post Jobs</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
