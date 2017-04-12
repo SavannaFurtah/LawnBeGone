@@ -32,7 +32,7 @@
                         <li><a href="PostJob.xhtml">Post Jobs</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" /></a></li>
+                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
                         <li><a href="editUser.xhtml">Edit User</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -42,7 +42,7 @@
         <div class="container">
             <h:form class="table1">
                 <h2 class="form-signin-heading"> Manage Jobs </h2>
-                <h:dataTable class="table table-striped" value="#{jobsData.job}" var="job">                  >
+                <h:dataTable class="table table-striped" value="#{jobsData.job}" var="job"> 
                     <h:column>
                         <f:facet name="header">Job Id</f:facet>
                             #{job.id}

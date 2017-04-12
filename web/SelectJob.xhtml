@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>Confirm Job</h1>
+        <h1>Job Title: #{jobData.currentJob.title}</h1>
+        <p>Job Description: #{jobData.currentJob.description}</p>
+        <p>Job Pay: #{jobData.currentJob.pay}</p>
+        
+        <p>Lawn owners first name: #{userList.getById(jobData.currentJob.owner).firstName}</p>
+        <p> Lawn owners address: #{userList.getById(jobData.currentJob.owner).address} #{userList.getById(jobData.currentJob.owner).city} #{userList.getById(jobData.currentJob.owner).postalCode} #{userList.getById(jobData.currentJob.owner).country}</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        
+        <h:form>
+       <p>
+                <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />
+                <h:inputText id="date" value="#{jobData.currentJob.scheduledDate}" required="true">
+                 <f:convertDateTime pattern="dd/mm/yyyy" /></h:inputText>      
+            </p>
+        <h:commandButton class="btn btn-info" id="submit" action="#{jobData.assignJobToCutter(jobData.currentJob.id, userData.currentUser.id,jobData.currentJob.scheduledDate)}"
+                             value="Submit Job"></h:commandButton>
+        </h:form>
+        
+    </h:body>
+</html>
+

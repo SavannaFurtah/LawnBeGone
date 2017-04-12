@@ -12,18 +12,32 @@ import java.sql.Date;
  * @author c0538434
  */
 public class Job {
-    private int id;
-    private User owner, cutter;
+
+    private int id, ownerId, cutterId;
     private double pay;
     private Date scheduledDate;
-    private String status;
+    private String title, description, status;
 
     public Job() {
     }
 
-    public Job(int id, User owner) {
+    public Job(int owner, double pay, String title, String description, String status) {
+        this.ownerId = owner;
+        this.pay = pay;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Job(int id, int owner, int cutter, double pay, Date scheduledDate, String title, String description, String status) {
         this.id = id;
-        this.owner = owner;
+        this.ownerId = owner;
+        this.cutterId = cutter;
+        this.pay = pay;
+        this.scheduledDate = scheduledDate;
+        this.title = title;
+        this.description = description;
+        this.status = status;
     }
 
     public int getId() {
@@ -34,20 +48,20 @@ public class Job {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
+    public int getOwner() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwner(int owner) {
+        this.ownerId = owner;
     }
 
-    public User getCutter() {
-        return cutter;
+    public int getCutter() {
+        return cutterId;
     }
 
-    public void setCutter(User cutter) {
-        this.cutter = cutter;
+    public void setCutter(int cutter) {
+        this.cutterId = cutter;
     }
 
     public double getPay() {
@@ -66,6 +80,22 @@ public class Job {
         this.scheduledDate = scheduledDate;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -73,6 +103,5 @@ public class Job {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }

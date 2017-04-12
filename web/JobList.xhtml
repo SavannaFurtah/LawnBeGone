@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
@@ -32,7 +32,7 @@
                         <li><a href="PostJob.xhtml">Post Jobs</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" /></a></li>
+                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
                         <li><a href="editUser.xhtml">Edit User</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -42,30 +42,30 @@
         <div class="container">
             <h:form class="table1">
                 <h2 class="form-signin-heading"> Jobs </h2>
-                <h:dataTable value="#{jobData.guestbookPosts}" var="job" class="table table-striped">
+                <h:dataTable value="#{jobList.jobList}" var="j" class="table table-striped">
                     <h:column>
                         <f:facet name="header"> Job Id </f:facet>
-                            #{job.id}
+                            #{j.id}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Pay </f:facet>
-                            #{job.pay}
+                            #{j.pay}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Title </f:facet>
-                            #{job.title}
+                            #{j.title}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Description </f:facet>
-                            #{job.description}
+                            #{j.description}
                     </h:column>
                     <h:column>
-                        <f:facet name="header"> Job Postal Code </f:facet>
-                            #{job.OwnerPostalCode}
+                        <f:facet name="header">Address</f:facet>
+                            #{userData.getById(j.owner).address}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Status </f:facet>
-                            #{job.status}
+                            #{j.status}
                     </h:column>
                 </h:dataTable>   
             </h:form>
