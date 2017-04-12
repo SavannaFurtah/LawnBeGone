@@ -53,7 +53,7 @@ public class JobList {
                         rs.getInt("ownerId"),
                         rs.getInt("cutterId"),
                         rs.getDouble("pay"),
-                        rs.getDate("scheduledDate"),
+                        rs.getString("scheduledDate"),
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));

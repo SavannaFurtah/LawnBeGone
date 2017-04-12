@@ -22,7 +22,7 @@
        <p>
                 <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />
                 <h:inputText id="date" value="#{jobData.currentJob.scheduledDate}" required="true">
-                 <f:convertDateTime pattern="dd/mm/yyyy" /></h:inputText>      
+                  </h:inputText>      
             </p>
         <h:commandButton class="btn btn-info" id="submit" action="#{jobData.assignJobToCutter(jobData.currentJob.id, userData.currentUser.id,jobData.currentJob.scheduledDate)}"
                              value="Submit Job"></h:commandButton>

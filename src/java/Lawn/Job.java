@@ -15,7 +15,15 @@ public class Job {
 
     private int id, ownerId, cutterId;
     private double pay;
-    private Date scheduledDate;
+    private String scheduledDate;
+
+    public String getScheduledDate() {
+        return scheduledDate;
+    }
+
+    public void setScheduledDate(String scheduledDate) {
+        this.scheduledDate = scheduledDate;
+    }
     private String title, description, status;
 
     public Job() {
@@ -29,7 +37,7 @@ public class Job {
         this.status = status;
     }
 
-    public Job(int id, int owner, int cutter, double pay, Date scheduledDate, String title, String description, String status) {
+    public Job(int id, int owner, int cutter, double pay, String scheduledDate, String title, String description, String status) {
         this.id = id;
         this.ownerId = owner;
         this.cutterId = cutter;
@@ -72,13 +80,6 @@ public class Job {
         this.pay = pay;
     }
 
-    public Date getScheduledDate() {
-        return scheduledDate;
-    }
-
-    public void setScheduledDate(Date scheduledDate) {
-        this.scheduledDate = scheduledDate;
-    }
 
     public String getTitle() {
         return title;
