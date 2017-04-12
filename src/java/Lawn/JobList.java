@@ -65,6 +65,7 @@ public class JobList {
         }
     }
     
+    
     public Job getJobById(int targetId) {
         for (Job j : jobList) {
             if (j.getId() == targetId)
