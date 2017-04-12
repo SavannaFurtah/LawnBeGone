@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Welcome!</title>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"></link>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <style>
+            h1,h2{
+                text-align: center;
+            }
+            p {
+                text-align: center;
+            }
+            button{
+                display:block; 
+                margin:0 auto;
+                position:relative;
+            }
+            #userJoin {
+                display: block;
+                margin: 0 auto;
+                position: relative;
+            }
+            #join{
+                display:block; 
+                margin:0 auto;
+                position:relative;
+            }
+            #login{
+                display:block; 
+                margin:0 auto;
+                position:relative;
+            }
+            #loginDiv{
+                display: inline-block;
+                text-align: center;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+
+            }
+            a:hover{
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Welcome to Lawn-Be-Gone!</h1>
+
+           
+            <p>Lawn-Be-Gone needs you! Earn money as an independent
+                contractor doing complete grounds maintenance. 
+                Create your own schedule and be your own boss! </p>
+            <p>Do you need your lawn cut? Sign up and receive lawn care within minutes.</p>
+
+
+            <h1>Join Today!</h1>
+
+            <div class ="col-md-12" id="loginDiv">
+                <h2>Create a new account:</h2>
+
+                <h3>Info about lawn owner Blah Blah Blah Blah Blah Blah
+                    Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</h3>
+                <h:form>
+                <h:button id="userJoin" value="User Registration" class="btn btn-success" outcome="UserRegistration" /></h:form>
+            </div>
+
+            <div class="col-md-12" id="loginDiv">
+                <h3>Already a member?</h3>
+                <h:button class="btn btn-info" id="login" outcome="Login" value="Login"></h:button>
+            </div>
+        </div>         
+    </h:body>
+    
+</html>
