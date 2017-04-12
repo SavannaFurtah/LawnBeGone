@@ -88,11 +88,10 @@ public class UserDataTest {
         System.out.println("hashPass");
         String pw = "";
         UserData instance = new UserData();
-        String expResult = "";
+        String expResult = "ERROR: Invalid Password";
         String result = instance.hashPass(pw);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**

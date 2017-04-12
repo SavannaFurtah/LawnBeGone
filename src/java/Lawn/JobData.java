@@ -149,7 +149,7 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
-    
+   
     public String editJob(int jobId) {
         try{
             Connection conn = DBUtils.getConnection();
