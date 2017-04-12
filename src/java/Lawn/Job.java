@@ -59,7 +59,7 @@ public class Job {
      * @param description
      * @param status 
      */
-    public Job(int id, int owner, int cutter, double pay, Date scheduledDate, String title, String description, String status) {
+    public Job(int id, int owner, int cutter, double pay, String scheduledDate, String title, String description, String status) {
         this.id = id;
         this.ownerId = owner;
         this.cutterId = cutter;
@@ -134,23 +134,6 @@ public class Job {
     public void setPay(double pay) {
         this.pay = pay;
     }
-  
-    /**
-     * the getScheduledDate method gets the scheduledDate and returns it
-     * @return 
-     */
-    public Date getScheduledDate() {
-        return scheduledDate;
-    }
-
-    /**
-     * setScheduledDate method sets the date for the job
-     * @param scheduledDate 
-     */
-    public void setScheduledDate(Date scheduledDate) {
-        this.scheduledDate = scheduledDate;
-    }
-
 
     /**
      * getTitle method gets the title for the job and returns the title

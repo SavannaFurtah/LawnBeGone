@@ -5,7 +5,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      lang="en">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,7 +94,7 @@ and open the template in the editor.
                         lorem. Cras vehicula erat et sapien faucibus dignissim. Maecenas ultrices sem eros, sed mollis nisl.</p>
 
                     <form>
-                        <button class="btn btn-success" id="userJoinButton" value="UserRegistration"><a href="UserRegistration.xhtml">User Registration</a></button>
+                        <h:button class="btn btn-success" id="userJoinButton" value="User Registration" outcome="UserRegistration"></h:button>
                     </form>
                 </div>
 
@@ -105,7 +107,7 @@ and open the template in the editor.
                         <br/>
                         Don't recreate your account! Sign back in anytime!</p>
                     <form>
-                        <button class="btn btn-success" id="login" value="login"><a href="Login.xhtml">Login</a></button>
+                        <h:button class="btn btn-success" id="Login" value="login" outcome="Login"></h:button>
                     </form>
                 </div>
             </div>
