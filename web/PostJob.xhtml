@@ -28,14 +28,27 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="JobList.xhtml">Job List</a></li>
-                        <li><a href="ManageJobs.xhtml">Manage Jobs</a></li>
-                        <li class="active"><a href="PostJob.xhtml">Post Jobs</a></li>
+                        <li><h:form><h:commandLink action="#{jobList.refreshJobList()}" value="Job List"></h:commandLink></h:form></li>
+                        <li>
+                            <h:form>
+                            <c:if test="#{userData.loggedIn}">
+                                <c:if test="#{userData.currentUser.id != null}">
+                                    <h:commandLink action="#{jobList.methodThree(userData.currentUser.id)}" value="Manage Page"></h:commandLink>
+                                </c:if>
+                            </c:if>
+                        </h:form>
+                        </li>
+                        <li><h:form><h:outputLink value="PostJob.xhtml">Post Jobs</h:outputLink></h:form></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
-                        <li><a href="editUser.xhtml">Edit User</a></li>
-                    </ul>
+                        <li><h:outputLink value="editUser.xhtml">Edit User</h:outputLink></li>
+                       
+                            <li>
+                                <h:form> <h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></h:form>
+                            </li>
+                      
+                    </ul> 
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
