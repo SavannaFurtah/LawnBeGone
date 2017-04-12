@@ -22,7 +22,7 @@
                 <div class="container">
                     <h:form class="table1">
                         <h2 class="form-signin-heading"> Home Owner Jobs </h2>
-                        <h:dataTable class="table" value="#{jobList.jobList}" var="j">
+                        <h:dataTable class="table" value="#{jobData.filterJobListByOwner(userData.currentUser.id)}" var="j">
                             <h:column>
                                 <f:facet name="header">Title</f:facet>
                                     #{j.title}
@@ -56,7 +56,7 @@
 
                     <h:form class="table1">
                         <h2 class="form-signin-heading"> Lawn Cutter Jobs </h2>
-                        <h:dataTable class="table" value="#{jobList.jobList}" var="j2">
+                        <h:dataTable class="table" value="#{jobData.filterJobListByCutter(userData.currentUser.id)}" var="j2">
                             <h:column>
                                 <f:facet name="header">Title</f:facet>
                                     #{j2.title}

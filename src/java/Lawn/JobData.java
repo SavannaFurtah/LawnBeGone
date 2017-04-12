@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -229,6 +231,24 @@ public class JobData {
         currentJob = job;
         currentJob.setOwnerId(owner);     
         return "EditJob";
+    }
+    
+    public ArrayList<Job> filterJobListByOwner(int owner) {
+        List<Job> filteredJobList = new ArrayList<>();
+        for (Job j : jl.getJobList()) {
+            if (j.getOwnerId() == owner)
+                filteredJobList.add(j);
+        }
+        return (ArrayList<Job>) filteredJobList;
+    }
+    
+    public ArrayList<Job> filterJobListByCutter(int cutter) {
+        List<Job> filteredJobList = new ArrayList<>();
+        for (Job j : jl.getJobList()) {
+            if (j.getCutterId() == cutter)
+                filteredJobList.add(j);
+        }
+        return (ArrayList<Job>) filteredJobList;
     }
 }
         
