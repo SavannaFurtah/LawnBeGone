@@ -22,7 +22,7 @@
         <ui:composition template="PageTemplate.xhtml">
             <ui:define name="content">
                 <div class="container">
-                    Test Content Please Ignore
+                    <h2>Lawn Owner Jobs</h2>
 
                     <h:form>
                         <h:dataTable class="table" value="#{jobList.jobList}" var="j">
@@ -52,6 +52,39 @@
                             </h:column>
                         </h:dataTable>
                     </h:form>
+                    
+                    
+                    <h2>Lawn Cutter Jobs</h2>
+                    <h:form>
+                        <h:dataTable class="table" value="#{jobList.jobList}" var="j">
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                    #{j.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Pay</f:facet>
+                                    #{j.pay}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{j.description}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{userList.getById(j.owner).postalCode}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{j.status}
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    
+                    
                 </div>
             </ui:define>
         </ui:composition>    

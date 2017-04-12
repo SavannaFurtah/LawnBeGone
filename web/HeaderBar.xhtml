@@ -36,7 +36,7 @@ This header partial requires bootstrap!
                         <h:form>
                         <c:if test="#{userData.loggedIn}">
                             <c:if test="#{userData.currentUser.id != null}">
-                                  <h:commandLink action="#{jobList.refreshJobList}" value="manage Page" ></h:commandLink>
+                                  <h:commandLink action="#{jobList.refreshJobList}" value="Job Lists" ></h:commandLink>
                             </c:if>
                             </c:if>
                         </h:form>
@@ -48,7 +48,7 @@ This header partial requires bootstrap!
                         <h:form>
                         <c:if test="#{userData.loggedIn}">
                             <c:if test="#{userData.currentUser.id != null}">
-                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="manage Page" ></h:commandLink>
+                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="Manage Page" ></h:commandLink>
                             </c:if>
                             </c:if>
                         </h:form>

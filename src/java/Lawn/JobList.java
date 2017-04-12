@@ -42,7 +42,7 @@ public class JobList {
         refreshJobList();
     }
     
-    public void refreshJobList() {
+    public String refreshJobList() {
         try (Connection conn = (Connection) DBUtils.getConnection()) {
             String sql = "SELECT * FROM jobs";
             jobList = new ArrayList<>();
@@ -59,11 +59,14 @@ public class JobList {
                         rs.getString("description"),
                         rs.getString("status"));
                 jobList.add(j);
+                
             }
+            return "JobList";
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
         }
+        return null;
     }
     
     public String sortByOwnerId(int id) {
@@ -85,10 +88,9 @@ public class JobList {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));
-                jobList.add(j);
-                
-                return "ManageJobs";
+                jobList.add(j);            
             }
+            return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
