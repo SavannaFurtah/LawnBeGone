@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -37,23 +35,11 @@ public class JobData {
     
     private User jobOwner = new User();
     
-    private List<User> users = new ArrayList<>();
-    
     @Inject
     private JobList jl;
     
     public JobData() {
         
-    }
-    
-     public User getById(int id){
-      for (User u : users)
-          if(u.getId() == id){
-              return u;
-          }
-      FacesContext facesContext = FacesContext.getCurrentInstance();
-      facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
-      return null;
     }
     
     
@@ -84,8 +70,6 @@ public class JobData {
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error."));
         return null;
     }
-    
-
 
     /**
      * Edits a job to assign a User id as the person who will be performing the
@@ -98,21 +82,19 @@ public class JobData {
      * @throws ParseException 
      */
     public String assignJobToCutter(int jobId, int cutterID, String date) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        Date scheduledDate = (Date) sdf.parse(date);
-       
-        
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy'T'kk:mm:ss");
+        //Date scheduledDate = (Date) sdf.parse(date);
         try {
             Connection conn = DBUtils.getConnection();
             String sql = "UPDATE jobs SET cutterId = ?, scheduledDate = ?, status = 'Scheduled' WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, cutterID);
-            pstmt.setDate(2, scheduledDate);
+            pstmt.setString(2, date);
             pstmt.setInt(3, jobId);
             pstmt.executeUpdate();
             Job updatedJob = jl.getJobById(jobId);
             updatedJob.setCutter(cutterID);
-            updatedJob.setScheduledDate(scheduledDate);
+            updatedJob.setScheduledDate(date);
             return "JobList";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,6 +163,4 @@ public class JobData {
         currentJob.setOwner(owner);     
         return"SelectJob";
     }
-    
-
 }
