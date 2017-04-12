@@ -53,7 +53,7 @@
                 <h:dataTable value="#{jobList.jobList}" var="j" class="table table-striped">
                     <h:column>
                         <f:facet name="header">Job Title</f:facet>
-                        <h:commandLink action="#{jobData.viewJob(j, j.owner)}">#{j.title} </h:commandLink>
+                        #{j.title}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Pay </f:facet>
@@ -70,6 +70,9 @@
                     <h:column>
                         <f:facet name="header"> Job Status </f:facet>
                             #{j.status}
+                    </h:column>
+                    <h:column>
+                        <h:commandButton action="#{jobData.viewJob(j, j.owner)}" value="Accept" ></h:commandButton>
                     </h:column>
                 </h:dataTable>   
             </h:form>
