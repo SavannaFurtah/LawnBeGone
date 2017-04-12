@@ -153,22 +153,21 @@ public class JobData {
     public String editJob(int jobId) {
         try{
             Connection conn = DBUtils.getConnection();
-            String sql = "UPDATE job SET title = ?, description = ?, pay = 0, status = ? WHERE id = ?";
+            String sql = "UPDATE jobs SET title = ?, description = ?, pay = ?, status = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(4, currentJob.getTitle());
-            pstmt.setString(5,currentJob.getDescription());
-            pstmt.setDouble(6,currentJob.getPay());
-            pstmt.setString(8,currentJob.getStatus());
-            pstmt.setInt(5, currentJob.getId());
+            pstmt.setString(1, currentJob.getTitle());
+            pstmt.setString(2,currentJob.getDescription());
+            pstmt.setDouble(3,currentJob.getPay());
+            pstmt.setString(4,currentJob.getStatus());
+            pstmt.setInt(5,currentJob.getId());
             pstmt.executeUpdate();
-            return "PostJob";
+            return "ManageJobs";
         }catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
         }
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage("postJobForm", new FacesMessage("Error: Database error"));
-        return null;
-        
+        return null;  
     }
     
     public Job getCurrentJob() {
@@ -183,5 +182,10 @@ public class JobData {
         currentJob = job;
         currentJob.setOwner(owner);     
         return"SelectJob";
+    }
+    public String editViewJob(Job job, int owner){
+        currentJob = job;
+        currentJob.setOwner(owner);     
+        return"EditJob";
     }
 }
