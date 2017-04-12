@@ -44,24 +44,20 @@
                 <h2 class="form-signin-heading"> Jobs </h2>
                 <h:dataTable value="#{jobList.jobList}" var="j" class="table table-striped">
                     <h:column>
-                        <f:facet name="header"> Job Id </f:facet>
-                            #{j.id}
+                        <f:facet name="header">Job Title</f:facet>
+                        <h:commandLink action="#{jobData.viewJob(j, j.owner)}">#{j.title} </h:commandLink>
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Pay </f:facet>
                             #{j.pay}
                     </h:column>
                     <h:column>
-                        <f:facet name="header"> Job Title </f:facet>
-                            #{j.title}
-                    </h:column>
-                    <h:column>
                         <f:facet name="header"> Job Description </f:facet>
                             #{j.description}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Address</f:facet>
-                            #{userData.getById(j.owner).address}
+                        <f:facet name="header"> Job Postal Code </f:facet>
+                            #{job.OwnerPostalCode}
                     </h:column>
                     <h:column>
                         <f:facet name="header"> Job Status </f:facet>
