@@ -33,13 +33,25 @@ This header partial requires bootstrap!
                         <h:link value="Lawn-B-Gone" outcome="index" class=""/>
                     </div>
                     <div class="col-md-1">
-                        <h:link value="Jobs" outcome="JobList" class="" style="color: white;" />
+                        <h:form>
+                        <c:if test="#{userData.loggedIn}">
+                            <c:if test="#{userData.currentUser.id != null}">
+                                  <h:commandLink action="#{jobList.refreshJobList}" value="manage Page" ></h:commandLink>
+                            </c:if>
+                            </c:if>
+                        </h:form>
                     </div>
                     <div class="col-md-1">
                         <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
                     </div>
                     <div class="col-md-1">
-                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
+                        <h:form>
+                        <c:if test="#{userData.loggedIn}">
+                            <c:if test="#{userData.currentUser.id != null}">
+                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="manage Page" ></h:commandLink>
+                            </c:if>
+                            </c:if>
+                        </h:form>
                     </div>
                     <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
                         <c:if test="#{!userData.loggedIn}">
