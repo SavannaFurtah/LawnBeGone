@@ -43,13 +43,12 @@ public class JobDataTest {
     @Test
     public void testCreateJob() {
         System.out.println("createJob");
-        int creator = 0;
+        int creator = 1;
         JobData instance = new JobData();
         String expResult = "";
         String result = instance.createJob(creator);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -69,7 +68,7 @@ public class JobDataTest {
         String result = instance.deleteJob(jobId);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -84,7 +83,7 @@ public class JobDataTest {
         String result = instance.removeCutterFromJob(jobId);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -98,7 +97,7 @@ public class JobDataTest {
         Job result = instance.getCurrentJob();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -111,7 +110,7 @@ public class JobDataTest {
         JobData instance = new JobData();
         instance.setCurrentJob(currentJob);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
     
 }

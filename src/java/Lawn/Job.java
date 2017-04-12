@@ -91,7 +91,7 @@ public class Job {
      * 
      * @return 
      */
-    public int getOwner() {
+    public int getOwnerId() {
         return ownerId;
     }
 
@@ -99,15 +99,15 @@ public class Job {
      * setOwner method sets the ownerId to the job
      * @param owner 
      */
-    public void setOwner(int owner) {
-        this.ownerId = owner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     /**
      * getCutter method gets the cutterId and returns it for the job
      * @return 
      */
-    public int getCutter() {
+    public int getCutterId() {
         return cutterId;
     }
 
@@ -115,8 +115,8 @@ public class Job {
      * setCutter method sets the cutterId to the job
      * @param cutter 
      */
-    public void setCutter(int cutter) {
-        this.cutterId = cutter;
+    public void setCutterId(int cutterId) {
+        this.cutterId = cutterId;
     }
 
     /**

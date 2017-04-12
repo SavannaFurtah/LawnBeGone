@@ -138,9 +138,13 @@ public class JobList {
     
     public Job getJobById(int targetId) {
         for (Job j : jobList) {
-            if (j.getId() == targetId)
+            System.out.println("Compared " + j.getId() + " with target " + targetId);
+            if (j.getId() == targetId) {
+                System.out.println("Returned job " + j.getId());
                 return j;
+            }
         }
+        System.out.println("Didn't find a job with that ID oh boy here comes a null pointer exception");
         return null;
     }
     

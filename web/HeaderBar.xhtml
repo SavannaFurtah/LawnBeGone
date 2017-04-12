@@ -7,68 +7,53 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <title>Facelet Title</title>
-        <style>
-            a:hover {
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
     </h:head>
     <h:body>
-        
-<!--
+        <!--
 This is a partial, which means it is only a piece of a web page! It should not
-be referred to in any way other than through a <ui:insert> and <ui:include> tag!
+be referred to in any way other than through a <ui:insert> and <ui:include> tag
+on a template!
 
 Example:
-<ui:insert 
+<ui:composition template="PageTemplate.xhtml">
+            <ui:define name="pageTitle">
+                <title>Job List</title>
+            </ui:define>
+            <ui:define name="content">
+                <INSERT CONTENT HERE>
+            </ui:define>
+</ui:composition>
 
 This header partial requires bootstrap!
--->
-        <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
+        -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
-                    <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
-                        <h:link value="Lawn-B-Gone" outcome="index" class=""/>
-                    </div>
-                    <div class="col-md-1">
-                        <h:form>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.id != null}">
-                                  <h:commandLink action="#{jobList.refreshJobList}" value="Job Lists" ></h:commandLink>
-                            </c:if>
-                            </c:if>
-                        </h:form>
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:form>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.id != null}">
-                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="Manage Page" ></h:commandLink>
-                            </c:if>
-                            </c:if>
-                        </h:form>
-                    </div>
-                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
-                        <c:if test="#{!userData.loggedIn}">
-                            <h:link value="Login" outcome="Login" style="color: white;"/>
-                        </c:if>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
-                            </c:if>
-                            <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
-                            </c:if>
-                        </c:if>
-                    </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
                 </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><h:link outcome="JobList" value="Job List"></h:link></li>
+                        <c:if test="#{userData.loggedIn}">
+                            <li><h:link outcome="ManageJobs" value="Manage Jobs"></h:link></li>
+                            <li><h:link outcome="PostJob" value="Post Job"></h:link></li>
+                        </c:if>
+                    </ul>
+                    <h:form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <c:if test="#{userData.loggedIn}">
+                                <li><h:link value="#{userData.currentUser.firstName}" outcome="editUser" /></li>
+                                <li><h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></li>
+                            </c:if>
+                            <c:if test="#{!userData.loggedIn}">
+                                <li><h:link value="Log in" outcome="Login" /></li>
+                            </c:if>
+                        </ul> 
+                    </h:form>
+                </div><!--/.nav-collapse -->
             </div>
-        </div>
+        </nav>
+
     </h:body>
 </html>
 

@@ -14,110 +14,81 @@
         <script src="http://code.jquery.com/jquery.min.js"></script>
     </h:head>
     <h:body>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
+        <ui:composition template="PageTemplate.xhtml">
+            <ui:define name="pageTitle">
+                <title>Manage Jobs</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <h:form class="table1">
+                        <h2 class="form-signin-heading"> Home Owner Jobs </h2>
+                        <h:dataTable class="table" value="#{jobList.jobList}" var="j">
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                    #{j.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Pay</f:facet>
+                                    #{j.pay}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{j.description}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Postal Code</f:facet>
+                                    #{userList.getById(j.ownerId).postalCode}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                    #{j.status}
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
+                            </h:column>
+                            <h:column>
+                                <h:commandButton action="#{jobData.editViewJob(j, j.ownerId)}" value="Edit" ></h:commandButton>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>
+
+                    <h:form class="table1">
+                        <h2 class="form-signin-heading"> Lawn Cutter Jobs </h2>
+                        <h:dataTable class="table" value="#{jobList.jobList}" var="j2">
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                    #{j2.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Pay</f:facet>
+                                    #{j2.pay}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{j2.description}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{userList.getById(j2.cutterId).postalCode}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{j2.status}
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton action="#{jobData.removeCutterFromJob(j2.id)}" value="Delete" ></h:commandButton>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>     
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><h:form><h:commandLink action="#{jobList.refreshJobList()}" value="Job List"></h:commandLink></h:form></li>
-                        <li>
-                            <h:form>
-                            <c:if test="#{userData.loggedIn}">
-                                <c:if test="#{userData.currentUser.id != null}">
-                                    <h:commandLink action="#{jobList.methodThree(userData.currentUser.id)}" value="Manage Page"></h:commandLink>
-                                </c:if>
-                            </c:if>
-                        </h:form>
-                        </li>
-                        <li><h:form><h:outputLink value="PostJob.xhtml">Post Jobs</h:outputLink></h:form></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
-                        <li><h:outputLink value="editUser.xhtml">Edit User</h:outputLink></li>
-                       
-                            <li>
-                                <h:form> <h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></h:form>
-                            </li>
-                      
-                    </ul> 
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
+            </ui:define>
+        </ui:composition>
 
-        <div class="container">
-            <h:form class="table1">
-                <h2 class="form-signin-heading"> Home Owner Jobs </h2>
-                <h:dataTable class="table" value="#{jobList.jobList}" var="j">
-                    <h:column>
-                        <f:facet name="header">Title</f:facet>
-                            #{j.title}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Pay</f:facet>
-                            #{j.pay}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Description</f:facet>
-                            #{j.description}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Postal Code</f:facet>
-                            #{userList.getById(j.owner).postalCode}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Status</f:facet>
-                            #{j.status}
-                    </h:column>
 
-                    <h:column>
-                        <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton action="#{jobData.editViewJob(j, j.owner)}" value="Edit" ></h:commandButton>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-
-            <h:form class="table1">
-                <h2 class="form-signin-heading"> Lawn Cutter Jobs </h2>
-                <h:dataTable class="table" value="#{jobList.jobList2}" var="j2">
-                    <h:column>
-                        <f:facet name="header">Title</f:facet>
-                            #{j2.title}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Pay</f:facet>
-                            #{j2.pay}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Description</f:facet>
-                            #{j2.description}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">address</f:facet>
-                            #{userList.getById(j2.cutter).postalCode}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">address</f:facet>
-                            #{j2.status}
-                    </h:column>
-
-                    <h:column>
-                        <h:commandButton action="#{jobData.removeCutterFromJob(userData.currentUser.id)}" value="Delete" ></h:commandButton>
-                    </h:column>
-                    
-                </h:dataTable>
-            </h:form>     
-        </div>
     </h:body>
 </html>
 

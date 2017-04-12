@@ -93,7 +93,7 @@ public class JobData {
             pstmt.setInt(3, jobId);
             pstmt.executeUpdate();
             Job updatedJob = jl.getJobById(jobId);
-            updatedJob.setCutter(cutterID);
+            updatedJob.setCutterId(cutterID);
             updatedJob.setScheduledDate(date);
             return "JobList";
         } catch (SQLException ex) {
@@ -133,14 +133,17 @@ public class JobData {
      */
     public String removeCutterFromJob(int jobId) {
         try {
+            Job updatedJob = jl.getJobById(jobId);
             Connection conn = DBUtils.getConnection();
-            String sql = "UPDATE jobs SET cutterId = 0, scheduledDate = null WHERE id = ?";
+            String sql = "UPDATE jobs SET cutterId = null, scheduledDate = null, status= 'Posted' WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, jobId);
             pstmt.executeUpdate();
-            Job updatedJob = jl.getJobById(jobId);
-          //  updatedJob.setCutter(0);
-           // updatedJob.setScheduledDate(null);
+            
+            //System.out.println("Got Job " + updatedJob.getId());
+            /*updatedJob.setCutterId(0);
+            updatedJob.setStatus("Posted");
+            updatedJob.setScheduledDate(null);*/
             return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,12 +183,12 @@ public class JobData {
 
     public String viewJob(Job job, int owner){
         currentJob = job;
-        currentJob.setOwner(owner);     
+        currentJob.setOwnerId(owner);     
         return"SelectJob";
     }
     public String editViewJob(Job job, int owner){
         currentJob = job;
-        currentJob.setOwner(owner);     
+        currentJob.setOwnerId(owner);     
         return"EditJob";
     }
 }
