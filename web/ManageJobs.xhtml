@@ -3,8 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <h:head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
@@ -17,52 +18,44 @@
         </style>
     </h:head>
     <h:body>
-       <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
-            <div class="container">
-                <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
-                    <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
-                        <h:link value="Lawn-B-Gone" outcome="index" class=""/>
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Jobs" outcome="JobList" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
-                        <c:if test="#{!userData.loggedIn}">
-                            <h:link value="Login" outcome="Login" style="color: white;"/>
-                        </c:if>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
-                            </c:if>
-                            <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
-                            </c:if>
-                        </c:if>
-                    </div>
+        <!-- THIS IS HOW PAGES SHOULD BE DONE -->
+        <ui:composition template="PageTemplate.xhtml">
+            <ui:define name="content">
+                <div class="container">
+                    Test Content Please Ignore
+
+                    <h:form>
+                        <h:dataTable class="table" value="#{jobList.jobList}" var="j">
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                    #{j.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Pay</f:facet>
+                                    #{j.pay}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{j.description}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{userList.getById(j.owner).postalCode}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">address</f:facet>
+                                    #{j.status}
+                            </h:column>
+
+                            <h:column>
+                                <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
                 </div>
-            </div>
-        </div>
-        <h:form>
-            <h:dataTable class="table" value="#{jobsData.job}" var="j">
-                <h:column>
-                    <f:facet name="header">Job Id</f:facet>
-                        #{j.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Owner Id</f:facet>
-                        #{j.ownerId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Status</f:facet>
-                        #{j.status}
-                </h:column>
-        </h:form>
+            </ui:define>
+        </ui:composition>    
+
     </h:body>
 </html>
 
