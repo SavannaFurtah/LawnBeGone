@@ -105,7 +105,7 @@ public class UserData {
      */
     public String logoutUser() {
         currentUser = new User();
-        loggedIn = true;
+        loggedIn = false;
         return "index";
     }
     
@@ -203,5 +203,6 @@ public class UserData {
         }
         return "Login";
     }
+
     
 }

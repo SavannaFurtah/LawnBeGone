@@ -31,7 +31,7 @@
                         <li> <h:form>
                         <c:if test="#{userData.loggedIn}">
                             <c:if test="#{userData.currentUser.id != null}">
-                                  <h:commandLink action="#{jobList.sortByOwnerId(userData.currentUser.id)}" value="Manage Page" ></h:commandLink>
+                                  <h:commandLink action="#{jobList.methodThree(userData.currentUser.id)}" value="Manage Page" ></h:commandLink>
                             </c:if>
                             </c:if>
                         </h:form></li>

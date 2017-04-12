@@ -46,36 +46,6 @@
                 <h:dataTable class="table" value="#{jobList.jobList}" var="j">
                     <h:column>
                         <f:facet name="header">Title</f:facet>
-                   <h:commandLink action="#{jobData.editViewJob(j, j.owner)}">#{j.title} </h:commandLink>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Pay</f:facet>
-                            #{j.pay}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Description</f:facet>
-                            #{j.description}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">address</f:facet>
-                            #{userList.getById(j.owner).postalCode}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">address</f:facet>
-                            #{j.status}
-                    </h:column>
-
-                    <h:column>
-                        <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-
-            <h:form class="table1">
-                <h2 class="form-signin-heading"> Lawn Cutter Jobs </h2>
-                <h:dataTable class="table" value="#{jobList.jobList}" var="j">
-                    <h:column>
-                        <f:facet name="header">Title</f:facet>
                             #{j.title}
                     </h:column>
                     <h:column>
@@ -87,11 +57,11 @@
                             #{j.description}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">address</f:facet>
+                        <f:facet name="header">Postal Code</f:facet>
                             #{userList.getById(j.owner).postalCode}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">address</f:facet>
+                        <f:facet name="header">Status</f:facet>
                             #{j.status}
                     </h:column>
 
@@ -99,8 +69,39 @@
                         <h:commandButton action="#{jobData.deleteJob(j.id)}" value="Delete" ></h:commandButton>
                     </h:column>
                     <h:column>
-                        <h:commandButton action="#{jobData.editJob(j.id)}" value="Delete" ></h:commandButton>
+                        <h:commandButton action="#{jobData.editViewJob(j, j.owner)}" value="Edit" ></h:commandButton>
                     </h:column>
+                </h:dataTable>
+            </h:form>
+
+            <h:form class="table1">
+                <h2 class="form-signin-heading"> Lawn Cutter Jobs </h2>
+                <h:dataTable class="table" value="#{jobList.jobList2}" var="j2">
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{j2.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Pay</f:facet>
+                            #{j2.pay}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                            #{j2.description}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">address</f:facet>
+                            #{userList.getById(j2.cutter).postalCode}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">address</f:facet>
+                            #{j2.status}
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton action="#{jobData.removeCutterFromJob(userData.currentUser.id)}" value="Delete" ></h:commandButton>
+                    </h:column>
+                    
                 </h:dataTable>
             </h:form>     
         </div>

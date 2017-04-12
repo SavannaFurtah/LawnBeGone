@@ -27,6 +27,15 @@ import javax.inject.Singleton;
 public class JobList {
 
     private List<Job> jobList = new ArrayList<>();
+    private List<Job> jobList2 = new ArrayList<>();
+
+    public List<Job> getJobList2() {
+        return jobList2;
+    }
+
+    public void setJobList2(List<Job> jobList2) {
+        this.jobList2 = jobList2;
+    }
     
     public JobList() {
         
@@ -68,14 +77,19 @@ public class JobList {
         }
         return null;
     }
+        
+    public String methodThree(int id) throws SQLException {
+    sortByOwnerId(id);
+    sortByCutterId(id);
+    return "ManageJobs";
+}
     
-    public String sortByOwnerId(int id) {
+    public void sortByOwnerId(int id) throws SQLException {
         try {
             Connection conn = (Connection) DBUtils.getConnection();
-            String sql = "SELECT * FROM jobs WHERE ownerId = ? OR cutterId = ?";
+            String sql = "SELECT * FROM jobs WHERE ownerId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);           
-            pstmt.setInt(2, id);
+            pstmt.setInt(1, id);            
             jobList = new ArrayList<>();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -88,26 +102,24 @@ public class JobList {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));
-                jobList.add(j);            
-            }
-            return "ManageJobs";
+                jobList.add(j);    
+            }   
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
         }
-        return "index";
     }
     
-    public String sortByCutterId(int id) {
+     public void sortByCutterId(int id) throws SQLException {
         try {
             Connection conn = (Connection) DBUtils.getConnection();
-            String sql = "SELECT * FROM jobs WHERE cutterId = ? OR owner";
+            String sql = "SELECT * FROM jobs WHERE cutterId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            jobList = new ArrayList<>();
+            pstmt.setInt(1, id);          
+            jobList2 = new ArrayList<>();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Job j = new Job(
+                Job j2 = new Job(
                         rs.getInt("id"),
                         rs.getInt("ownerId"),
                         rs.getInt("cutterId"),
@@ -116,14 +128,12 @@ public class JobList {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));
-                jobList.add(j);
-                return "ManageJobs";
-            }
+                jobList2.add(j2);
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            jobList = new ArrayList<>();
+            jobList2 = new ArrayList<>();
         }
-        return "index";
     }
     
     public Job getJobById(int targetId) {
