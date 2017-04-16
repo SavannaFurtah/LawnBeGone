@@ -250,5 +250,14 @@ public class JobData {
         }
         return (ArrayList<Job>) filteredJobList;
     }
+    
+    public ArrayList<Job> filterJobListByStatusUnscheduled() {
+        List<Job> filteredJobList = new ArrayList<>();
+        for (Job j : jl.getJobList()) {
+            if (j.getStatus().equals("Posted"))
+                filteredJobList.add(j);
+        }
+        return (ArrayList<Job>) filteredJobList;
+    }
 }
         
