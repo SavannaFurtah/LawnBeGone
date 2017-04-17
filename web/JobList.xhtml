@@ -22,7 +22,7 @@
                 <div class="container">
                     <h:form class="table1">
                         <h2 class="form-signin-heading"> Jobs </h2>
-                        <h:dataTable value="#{jobData.filterJobListByStatusUnscheduled}" var="j" class="table table-striped">
+                        <h:dataTable value="#{jobData.filterJobListByStatusUnscheduled()}" var="j" class="table table-striped">
                             <h:column>
                                 <f:facet name="header">Job Title</f:facet>
                                     #{j.title}
