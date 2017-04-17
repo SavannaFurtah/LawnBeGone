@@ -6,6 +6,7 @@
 package Lawn;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -144,7 +145,7 @@ public class UserList {
      * @param u adds to the userList
      */
     public void addToUserList(User u) {
-        userList.add(u);
+        refreshUserList(); //Literally the worst way to do this, change later
     }
 
     /**

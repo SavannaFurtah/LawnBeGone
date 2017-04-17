@@ -147,10 +147,9 @@ public class JobData {
             pstmt.setInt(1, jobId);
             pstmt.executeUpdate();
             
-            //System.out.println("Got Job " + updatedJob.getId());
-            /*updatedJob.setCutterId(0);
+            updatedJob.setCutterId(0);
             updatedJob.setStatus("Posted");
-            updatedJob.setScheduledDate(null);*/
+            updatedJob.setScheduledDate(null);
             return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);

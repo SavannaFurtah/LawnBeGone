@@ -114,6 +114,7 @@ public class UserData {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (ul.verifyCredentials(currentUser.getEmail(), currentUser.getHashedPassword())) {
             currentUser = ul.getUserByEmail(currentUser.getEmail());
+            System.out.println("Got user " + currentUser.getId() + ": " + currentUser.getEmail());
             loggedIn = true;
             return "JobList";
         }
