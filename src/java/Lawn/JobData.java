@@ -99,7 +99,8 @@ public class JobData {
             Job updatedJob = jl.getJobById(jobId);
             updatedJob.setCutterId(cutterID);
             updatedJob.setScheduledDate(date);
-            return "JobList";
+            updatedJob.setStatus("Scheduled");
+            return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -122,7 +123,7 @@ public class JobData {
             pstmt.setInt(1, jobId);
             pstmt.executeUpdate();
             jl.removeJobById(jobId);
-            return "JobList";
+            return "ManageJobs";
         } catch (SQLException ex) {
             Logger.getLogger(Job.class.getName()).log(Level.SEVERE, null, ex);
         }
