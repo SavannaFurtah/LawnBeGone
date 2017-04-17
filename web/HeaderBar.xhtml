@@ -42,7 +42,7 @@ This header partial requires bootstrap!
                     <h:form>
                         <ul class="nav navbar-nav navbar-right">
                             <c:if test="#{userData.loggedIn}">
-                                <li><h:link value="#{userData.currentUser.firstName}" outcome="editUser" /></li>
+                                <li><h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" /></li>
                                 <li><h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></li>
                             </c:if>
                             <c:if test="#{!userData.loggedIn}">

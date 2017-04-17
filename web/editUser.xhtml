@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Edit User</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,91 +21,97 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
+        <!--        <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="JobList.xhtml">Lawn-Be-Gone</a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                             <ul class="nav navbar-nav">
+                                <li><h:form><h:commandLink action="#{jobList.refreshJobList()}" value="Job List"></h:commandLink></h:form></li>
+                                <li>
+                                    <h:form>
+                                    <c:if test="#{userData.loggedIn}">
+                                        <c:if test="#{userData.currentUser.id != null}">
+                                            <h:commandLink action="#{jobList.methodThree(userData.currentUser.id)}" value="Manage Page"></h:commandLink>
+                                        </c:if>
+                                    </c:if>
+                                </h:form>
+                                </li>
+                                <li><h:form><h:outputLink value="PostJob.xhtml">Post Jobs</h:outputLink></h:form></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
+                                <li><h:outputLink value="editUser.xhtml">Edit User</h:outputLink></li>
+                               
+                                    <li>
+                                        <h:form> <h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></h:form>
+                                    </li>
+                              
+                            </ul> 
+                        </div>/.nav-collapse 
+                    </div>
+                </nav>-->
+        <ui:composition template="PageTemplate.xhtml">
+            <ui:define name="pageTitle">
+                <title>Edit User</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <h:form class="form-signin">
+                        <h2 class="form-signin-heading"> User Information </h2>
+
+                        <div>
+                            <h:outputLabel for="firstName" class="control-label" value="First Name:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.firstName}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="lastName" class="control-label" value="Last Name:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.lastName}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="address" class="control-label" value="Street Address:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.address}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="city" class="control-label" value="City:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.city}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="province" class="control-label" value="Province:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.province}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="postalCode" class="control-label" value="Postal Code:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.postalCode}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <h:outputLabel for="country" class="control-label" value="Country:" />
+                            <div>
+                                <h:inputText value="#{userData.currentUser.country}" class="form-control input-md" required="true" />
+                            </div>
+
+                            <div class="btn-group">
+                                <br /><h:commandButton class="btn btn-success" value="Save" action="#{userData.saveUser}"/>
+                            </div>
+                            <div class="btn-group">
+                            </div>
+                        </div>
+                    </h:form>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                     <ul class="nav navbar-nav">
-                        <li><h:form><h:commandLink action="#{jobList.refreshJobList()}" value="Job List"></h:commandLink></h:form></li>
-                        <li>
-                            <h:form>
-                            <c:if test="#{userData.loggedIn}">
-                                <c:if test="#{userData.currentUser.id != null}">
-                                    <h:commandLink action="#{jobList.methodThree(userData.currentUser.id)}" value="Manage Page"></h:commandLink>
-                                </c:if>
-                            </c:if>
-                        </h:form>
-                        </li>
-                        <li><h:form><h:outputLink value="PostJob.xhtml">Post Jobs</h:outputLink></h:form></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Hello <h:outputText value="#{userData.currentUser.firstName}" />!</a></li>
-                        <li><h:outputLink value="editUser.xhtml">Edit User</h:outputLink></li>
-                       
-                            <li>
-                                <h:form> <h:commandLink action="#{userData.logoutUser()}" value="Logout"></h:commandLink></h:form>
-                            </li>
-                      
-                    </ul> 
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-
-        <div class="container">
-            <h:form class="form-signin">
-                <h2 class="form-signin-heading"> User Information </h2>
-
-                <div>
-                    <h:outputLabel for="firstName" class="control-label" value="First Name:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.firstName}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="lastName" class="control-label" value="Last Name:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.lastName}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="address" class="control-label" value="Street Address:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.address}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="city" class="control-label" value="City:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.city}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="province" class="control-label" value="Province:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.province}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="postalCode" class="control-label" value="Postal Code:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.postalCode}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <h:outputLabel for="country" class="control-label" value="Country:" />
-                    <div>
-                        <h:inputText value="#{userData.currentUser.country}" class="form-control input-md" required="true" />
-                    </div>
-
-                    <div class="btn-group">
-                        <br /><h:commandButton class="btn btn-success" value="Save" action="#{userData.saveUser}"/>
-                    </div>
-                    <div class="btn-group">
-                    </div>
-                </div>
-            </h:form>
-        </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
