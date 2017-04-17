@@ -1,33 +1,69 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Job List</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="css/projectStyling.css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
     </h:head>
     <h:body>
-        <h1>Confirm Job</h1>
-        <h1>Job Title: #{jobData.currentJob.title}</h1>
-        <p>Job Description: #{jobData.currentJob.description}</p>
-        <p>Job Pay: #{jobData.currentJob.pay}</p>
-        
-        <p>Lawn owners first name: #{userList.getById(jobData.currentJob.owner).firstName}</p>
-        <p> Lawn owners address: #{userList.getById(jobData.currentJob.owner).address} #{userList.getById(jobData.currentJob.owner).city} #{userList.getById(jobData.currentJob.owner).postalCode} #{userList.getById(jobData.currentJob.owner).country}</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        
-        <h:form>
-       <p>
-                <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />
-                <h:inputText id="date" value="#{jobData.currentJob.scheduledDate}" required="true">
-                 <f:convertDateTime pattern="dd/mm/yyyy" /></h:inputText>      
-            </p>
-        <h:commandButton class="btn btn-info" id="submit" action="#{jobData.assignJobToCutter(jobData.currentJob.id, userData.currentUser.id,jobData.currentJob.scheduledDate)}"
-                             value="Submit Job"></h:commandButton>
-        </h:form>
-        
+        <ui:composition template="PageTemplate.xhtml">
+            <ui:define name="pageTitle">
+                <title>Schedule Job</title>
+            </ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <h:form class="form-signin">
+                        <h2 class="form-signin-heading"> Accept Job </h2>
+                        <div>
+                            <br />
+                            <h:outputLabel>Job Title: #{jobData.currentJob.title}</h:outputLabel>
+                            <h:outputLabel>Job Description: #{jobData.currentJob.description}</h:outputLabel>
+                            <h:outputLabel>Job Pay: #{jobData.currentJob.pay}</h:outputLabel>
+                        </div>
+
+                        <div>
+                            <br />
+                            <h4>Home Owner Information</h4>
+                            <div>
+                                <h:outputLabel>First Name: #{userList.getById(jobData.currentJob.ownerId).firstName}</h:outputLabel>
+                                <h:outputLabel>Street Address: #{userList.getById(jobData.currentJob.ownerId).address} 
+                                    #{userList.getById(jobData.currentJob.ownerId).city}, 
+                                </h:outputLabel>
+                                <h:outputLabel>
+                                    #{userList.getById(jobData.currentJob.ownerId).postalCode} 
+                                    #{userList.getById(jobData.currentJob.ownerId).country}
+                                </h:outputLabel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <br />
+                            <h:form>
+                                <h:outputLabel for="date" value="Date of Job(dd/mm/yy):  " />
+                                <div>
+                                    <h:inputText id="date" value="#{jobData.currentJob.scheduledDate}" required="true">
+                                        <f:convertDateTime pattern="dd/mm/yyyy" /></h:inputText>      </div>
+                                <div>
+                                    <br />
+                                    <h:commandButton class="btn btn-info" id="submit" 
+                                                     action="#{jobData.assignJobToCutter(jobData.currentJob.id, userData.currentUser.id,jobData.currentJob.scheduledDate)}"
+                                                     value="Accept Job">
+                                    </h:commandButton>
+                                </div>
+                            </h:form>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

@@ -6,6 +6,7 @@
 package Lawn;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,7 @@ import javax.inject.Singleton;
 
 /**
  * The singleton that holds the user list and user list accessories.
+ *
  * @author c0538434
  */
 @Named
@@ -27,12 +29,15 @@ public class UserList {
 
     private List<User> userList = new ArrayList<>();
 
+    /**
+     * empty userList constructor
+     */
     public UserList() {
     }
-    
+
     /**
-     * This method runs when the server is up and running, ensuring that
-     * it only runs a single time. Loads up the user list into memory.
+     * This method runs when the server is up and running, ensuring that it only
+     * runs a single time. Loads up the user list into memory.
      */
     @PostConstruct
     void init() {
@@ -42,6 +47,7 @@ public class UserList {
 
     /**
      * Looks through the list of users to find if the email matches
+     *
      * @param targetEmail The email address to look for (case insensitive)
      * @return True if an email matches, false if none do
      */
@@ -53,41 +59,59 @@ public class UserList {
         }
         return false;
     }
-    
-    public User getById(int id){
-      for (User u : userList)
-          if(id == u.getId()){
-              return u;
-          }
-      return null;
+
+    /**
+     * getById accepts the id
+     *
+     * @param id
+     * @return the user from the list
+     */
+    public User getById(int id) {
+        for (User u : userList) {
+            if (id == u.getId()) {
+                return u;
+            }
+        }
+        return null;
     }
-    
+
     /**
      * Looks through the list of users to find the user that matches it
+     *
      * @param email the email address to look for (case insensitive)
      * @return The entire User object that matches the email, null if not found
      */
     public User getUserByEmail(String email) {
         for (User u : userList) {
-            if (email.toLowerCase().equals(u.getEmail().toLowerCase()))
+            if (email.toLowerCase().equals(u.getEmail().toLowerCase())) {
                 return u;
+            }
         }
         return null;
     }
-    
+
+    /**
+     * verifyCredentials accepts
+     *
+     * @param username
+     * @param passHash
+     * @return true if username, passHash are equal, false if they do not match
+     */
     public boolean verifyCredentials(String username, String passHash) {
         for (User u : userList) {
-            if (username.toLowerCase().equals(u.getEmail().toLowerCase()))
-                if (passHash.equals(u.getHashedPassword()))
+            if (username.toLowerCase().equals(u.getEmail().toLowerCase())) {
+                if (passHash.equals(u.getHashedPassword())) {
                     return true;
+                }
+            }
         }
         return false;
     }
-    
+
     /**
      * Causes the application to query the database and load all users into
-     * local memory. Should probably only be run on post-initialization but
-     * hey, I'm a JavaDoc, not a cop.
+     * local memory. Should probably only be run on post-initialization but hey,
+     * I'm a JavaDoc, not a cop.
      */
     public void refreshUserList() {
         try (Connection conn = (Connection) DBUtils.getConnection()) {
@@ -114,13 +138,23 @@ public class UserList {
             userList = new ArrayList<>();
         }
     }
-    
+
+    /**
+     * addToUserList accepts
+     *
+     * @param u adds to the userList
+     */
     public void addToUserList(User u) {
-        userList.add(u);
+        refreshUserList(); //Literally the worst way to do this, change later
     }
 
+    /**
+     * getUserList
+     *
+     * @return the userList
+     */
     public List<User> getUserList() {
         return userList;
     }
-    
+
 }

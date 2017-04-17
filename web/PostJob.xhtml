@@ -3,81 +3,63 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <title>Add a Job</title>
-        <style>
-            a:hover {
-                font-weight: bold;
-                text-decoration: none;
-            }
-        </style>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="css/projectStyling.css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+
+        <title>Post Job</title>
     </h:head>     
     <h:body>
-        <div class="container-fluid" style="background: #333; color: white; font-size: 25px;">
-            <div class="container">
-                <div class="row" style="background: #2aa; text-align: center; font-size: 100%;">
-                    <div class="col-md-2" style="background: greenyellow; font-weight: bold;">
-                        <h:link value="Lawn-B-Gone" outcome="index" class=""/>
+        <ui:composition template="PageTemplate.xhtml">
+            <ui:define name="pageTitle">
+                <title>Schedule Job</title>
+            </ui:define>
+            <ui:define name="content">
+
+                <div class="container"> 
+                    <div class="col-md-6">
+                        <br />
+                        <h2>Job Location</h2>
+                        <div><h4>Name:</h4><h:outputText value="#{userData.currentUser.firstName} #{userData.currentUser.lastName}"/></div>
+                        <div><h4>Street Address:</h4><h:outputText value="#{userData.currentUser.address}, #{userData.currentUser.city} #{userData.currentUser.province} "/></div>
+                        <div><h:outputText value="#{userData.currentUser.postalCode} #{userData.currentUser.country}"/></div>
                     </div>
-                    <div class="col-md-1">
-                        <h:link value="Jobs" outcome="JobList" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Post" outcome="PostJob" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-1">
-                        <h:link value="Manage" outcome="ManageJobs" class="" style="color: white;" />
-                    </div>
-                    <div class="col-md-3 col-md-offset-4" style="text-align: right;" >
-                        <c:if test="#{!userData.loggedIn}">
-                            <h:link value="Login" outcome="Login" style="color: white;"/>
-                        </c:if>
-                        <c:if test="#{userData.loggedIn}">
-                            <c:if test="#{userData.currentUser.firstName != null}">
-                                <h:link value="Hello #{userData.currentUser.firstName}!" outcome="editUser" style="color: white;"/>
-                            </c:if>
-                            <c:if test="#{userData.currentUser.firstName == null}">
-                                <h:link value="Hello #{userData.currentUser.email}!" outcome="editUser" style="color: white;" />
-                            </c:if>
-                        </c:if>
-                    </div>
+                    <h:form class="form-signin col-md-6">
+                        <h2 class="form-signin-heading"> Add a Job </h2>
+                        <div>
+                            <!-- Title Input -->
+                            <h:outputLabel for="title" value="Job Title: " />
+                            <div>
+                                <h:inputText id="title" value="#{jobData.currentJob.title}" class="form-control input-md" required="true" ></h:inputText>      
+                            </div>
+
+                            <!-- Description Input -->
+                            <h:outputLabel for="desc" value="Job Description: " />
+                            <div>
+                                <h:inputText id="description" value="#{jobData.currentJob.description}" class="form-control input-md" required="true" ></h:inputText>      
+                            </div>
+
+                            <!-- Pay Input -->
+                            <h:outputLabel for="pay" value="Job Pay: " />
+                            <div>
+                                <h:inputText id="pay" value="#{jobData.currentJob.pay}" class="form-control input-md" required="true" />           
+                            </div>
+
+                            <!-- Submit Job Button -->
+                            <div class="btn-group">
+                                <br /><h:commandButton class="btn btn-info" id="submit" action="#{jobData.createJob(userData.currentUser.id)}" value="Submit Job"></h:commandButton>
+                            </div>
+                        </div>
+                    </h:form>   
                 </div>
-            </div>
-        </div>
-
-        <h:form id="postJobForm">
-            <h1>Add a Job!</h1>
-            <h:message id="error" for="postJobForm" class="label label-danger" />
-            <c:if test="#{userData.loggedIn}">
-                <c:if test="#{userData.currentUser.firstName != null}">
-                    <h:outputText value="#{userData.currentUser.firstName}"></h:outputText>
-                </c:if>
-                <c:if test="#{userData.currentUser.firstName == null}">
-                    <h:link value="Hello #{userData.currentUser.email}!" outcome="index" />
-                </c:if>
-            </c:if>
-            
-            <p>
-                <h:outputLabel for="title" value="Job Title: " />
-                <h:inputText id="title" value="#{jobData.currentJob.title}" required="true"></h:inputText>
-            </p>
-            <p>
-                <h:outputLabel for="pay" value="Job Pay: " />
-                <h:inputText id="pay" value="#{jobData.currentJob.pay}" required="true"></h:inputText>      
-            </p>
-            <p>
-                <h:outputLabel for="desc" value="Job Description: " />
-                <h:inputTextarea id="desc" value="#{jobData.currentJob.description}"></h:inputTextarea>
-            </p>
-
-            <h:commandButton class="btn btn-info" id="submit" action="#{jobData.createJob(userData.currentUser.id)}"
-                             value="Submit Job"></h:commandButton>
-            
-        </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
+
 

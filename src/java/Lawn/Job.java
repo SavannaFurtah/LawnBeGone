@@ -15,7 +15,15 @@ public class Job {
 
     private int id, ownerId, cutterId;
     private double pay;
-    private Date scheduledDate;
+    private String scheduledDate;
+
+    public String getScheduledDate() {
+        return scheduledDate;
+    }
+
+    public void setScheduledDate(String scheduledDate) {
+        this.scheduledDate = scheduledDate;
+    }
     private String title, description, status;
 
     /**
@@ -25,12 +33,13 @@ public class Job {
     }
 
     /**
-     * Job constructor with each parameter 
+     * Job constructor with each parameter
+     *
      * @param owner
      * @param pay
      * @param title
      * @param description
-     * @param status 
+     * @param status
      */
     public Job(int owner, double pay, String title, String description, String status) {
         this.ownerId = owner;
@@ -41,7 +50,8 @@ public class Job {
     }
 
     /**
-     * Job constructor 
+     * Job constructor
+     *
      * @param id
      * @param owner
      * @param cutter
@@ -49,9 +59,9 @@ public class Job {
      * @param scheduledDate
      * @param title
      * @param description
-     * @param status 
+     * @param status
      */
-    public Job(int id, int owner, int cutter, double pay, Date scheduledDate, String title, String description, String status) {
+    public Job(int id, int owner, int cutter, double pay, String scheduledDate, String title, String description, String status) {
         this.id = id;
         this.ownerId = owner;
         this.cutterId = cutter;
@@ -64,15 +74,17 @@ public class Job {
 
     /**
      * getId method gets job id and returns the job id
-     * @return 
+     *
+     * @return
      */
     public int getId() {
         return id;
     }
 
     /**
-     * setId method sets the job id 
-     * @param id 
+     * setId method sets the job id
+     *
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
@@ -80,40 +92,44 @@ public class Job {
 
     /**
      * getOwner method gets the ownerId and returns the ownerId
-     * 
-     * @return 
+     *
+     * @return
      */
-    public int getOwner() {
+    public int getOwnerId() {
         return ownerId;
     }
 
     /**
      * setOwner method sets the ownerId to the job
-     * @param owner 
+     *
+     * @param owner
      */
-    public void setOwner(int owner) {
-        this.ownerId = owner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     /**
      * getCutter method gets the cutterId and returns it for the job
-     * @return 
+     *
+     * @return
      */
-    public int getCutter() {
+    public int getCutterId() {
         return cutterId;
     }
 
     /**
      * setCutter method sets the cutterId to the job
-     * @param cutter 
+     *
+     * @param cutter
      */
-    public void setCutter(int cutter) {
-        this.cutterId = cutter;
+    public void setCutterId(int cutterId) {
+        this.cutterId = cutterId;
     }
 
     /**
      * getPay method gets the pay amount and returns the pay for the job
-     * @return 
+     *
+     * @return
      */
     public double getPay() {
         return pay;
@@ -121,31 +137,17 @@ public class Job {
 
     /**
      * setPay method sets the pay for the job
-     * @param pay 
+     *
+     * @param pay
      */
     public void setPay(double pay) {
         this.pay = pay;
     }
 
     /**
-     * the getScheduledDate method gets the scheduledDate and returns it
-     * @return 
-     */
-    public Date getScheduledDate() {
-        return scheduledDate;
-    }
-
-    /**
-     * setScheduledDate method sets the date for the job
-     * @param scheduledDate 
-     */
-    public void setScheduledDate(Date scheduledDate) {
-        this.scheduledDate = scheduledDate;
-    }
-
-    /**
      * getTitle method gets the title for the job and returns the title
-     * @return 
+     *
+     * @return
      */
     public String getTitle() {
         return title;
@@ -153,7 +155,8 @@ public class Job {
 
     /**
      * setTitle method sets the title for the job
-     * @param title 
+     *
+     * @param title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -161,7 +164,8 @@ public class Job {
 
     /**
      * getDescription method gets the description for the job
-     * @return 
+     *
+     * @return
      */
     public String getDescription() {
         return description;
@@ -169,15 +173,17 @@ public class Job {
 
     /**
      * setDescription method sets the description of the job
-     * @param description 
+     *
+     * @param description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * getStatus method gets the status for the job 
-     * @return 
+     * getStatus method gets the status for the job
+     *
+     * @return
      */
     public String getStatus() {
         return status;
@@ -185,7 +191,8 @@ public class Job {
 
     /**
      * setStatus method sets the status
-     * @param status 
+     *
+     * @param status
      */
     public void setStatus(String status) {
         this.status = status;

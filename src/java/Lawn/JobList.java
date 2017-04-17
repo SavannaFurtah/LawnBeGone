@@ -6,6 +6,7 @@
 package Lawn;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,22 +27,33 @@ import javax.inject.Singleton;
 public class JobList {
 
     private List<Job> jobList = new ArrayList<>();
-    
-    public JobList() {
-        
-    }
-    
+
     /**
-     * This method runs when the server is up and running, ensuring that
-     * it only runs a single time. Loads up the job list into memory.
+     * empty constructor
+     */
+    public JobList() {
+
+    }
+
+    /**
+     * This method runs when the server is up and running, ensuring that it only
+     * runs a single time. Loads up the job list into memory.
      */
     @PostConstruct
     void init() {
         System.out.println("JobList init complete, refreshing job list.");
         refreshJobList();
     }
-    
-    public void refreshJobList() {
+
+    /**
+     * refreshJobList method refreshes the jobList in the database and returns
+     * the jobList from the database. This probably shouldn't get done except
+     * by the initializer, but if you find a (REALLY) good reason for it you can
+     * use it again.
+     *
+     * @return
+     */
+    public String refreshJobList() {
         try (Connection conn = (Connection) DBUtils.getConnection()) {
             String sql = "SELECT * FROM jobs";
             jobList = new ArrayList<>();
@@ -53,38 +65,62 @@ public class JobList {
                         rs.getInt("ownerId"),
                         rs.getInt("cutterId"),
                         rs.getDouble("pay"),
-                        rs.getDate("scheduledDate"),
+                        rs.getString("scheduledDate"),
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getString("status"));
                 jobList.add(j);
+
             }
+            return "JobList";
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             jobList = new ArrayList<>();
         }
-    }
-    
-    
-    public Job getJobById(int targetId) {
-        for (Job j : jobList) {
-            if (j.getId() == targetId)
-                return j;
-        }
         return null;
     }
-    
+
+    /**
+     * getJobById method accepts the targetId and returns it to the jobList
+     *
+     * @param targetId
+     * @return
+     */
+    public Job getJobById(int targetId) {
+        for (Job j : jobList) {
+            if (j.getId() == targetId) {
+                return j;
+            }
+        }
+        System.out.println("Didn't find a job with that ID oh boy here comes a null pointer exception");
+        return null;
+    }
+
+    /**
+     * removeJobById method removes the job by the targetId from the list
+     *
+     * @param targetId
+     */
     public void removeJobById(int targetId) {
         jobList.remove(this.getJobById(targetId));
     }
 
+    /**
+     * the getJobList method gets the list of jobs and returns it
+     *
+     * @return
+     */
     public List<Job> getJobList() {
         return jobList;
     }
 
+    /**
+     * setJobList method sets the jobList accepting
+     *
+     * @param jobList
+     */
     public void setJobList(List<Job> jobList) {
         this.jobList = jobList;
     }
-    
-    
+
 }

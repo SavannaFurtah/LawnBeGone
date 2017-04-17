@@ -2,49 +2,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>LawnBGone - New User Registration</title>
-                <meta charset="UTF-8"></meta>
+        <title>User Registration</title>
+        <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="css/projectStyling.css" rel="stylesheet" />
         <script src="http://code.jquery.com/jquery.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"></link>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <!-- Most of the validation stuff is "inspired" by a stackoverflow
+                     example on how to make a custom password confirmation
+                     validator. http://stackoverflow.com/questions/7489893/how-validate-two-password-fields-by-ajax
+        -->
     </h:head>
     <h:body>
-        <h1>New User Registration</h1>
-        <h:form id="form">
-
-            <!-- Most of the validation stuff is "inspired" by a stackoverflow
-                 example on how to make a custom password confirmation
-                 validator. http://stackoverflow.com/questions/7489893/how-validate-two-password-fields-by-ajax
-            -->
-            <p>
+        <div class="container">
+            <h:form id="form" class="form-signin">
+                <h2 class="form-signin-heading"> User Registration </h2>
                 <h:message id="m_error" for="form"/>
-                <h:outputLabel for="email" value="E-mail: " />
-                <h:inputText id="email" value="#{userData.currentUser.email}" required="true">
-                    <f:validator binding="#{registerValidator}" />
-                    <f:attribute name="password" value="#{basePassword.submittedValue}" />
-                    <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                    <f:ajax event="blur" execute="email password confirm" render="m_error" />
-                </h:inputText>
-            </p>
-            <p>
-                <h:outputLabel for="password" value="Password: " />
-                <h:inputSecret id="password" binding="#{basePassword}" value="#{userData.password}" required="true">
-                    <f:ajax event="blur" execute="email password confirm" render="m_error" />
-                </h:inputSecret>
-            </p>
-            <p>
-                <h:outputLabel for="confirm" value="Confirm Password: " />
-                <h:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
-                    <f:ajax event="blur" execute="email password confirm" render="m_error" />
-                </h:inputSecret>
-            </p>
-            <p>
-                <h:commandButton class="btn btn-info" id="register" value="Register" action="#{userData.createUser()}" />
-            </p>
-        </h:form>
+
+                <!-- Email Entry -->
+                <div>
+                    <h:outputLabel for="email" value="Email Address: " />
+                    <h:inputText id="email" value="#{userData.currentUser.email}" required="true" class="form-control input-md">
+                        <f:validator binding="#{registerValidator}" />
+                        <f:attribute name="password" value="#{basePassword.submittedValue}" />
+                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                        <f:ajax event="blur" execute="email password confirm" render="m_error" />
+                    </h:inputText>
+                </div>
+
+                <!-- Password First Entry -->
+                <div>
+                    <h:outputLabel for="password" value="Password: " />
+                    <h:inputSecret id="password" binding="#{basePassword}" value="#{userData.password}" required="true" class="form-control input-md">
+                        <f:ajax event="blur" execute="email password confirm" render="m_error" />
+                    </h:inputSecret>
+                </div>
+
+                <!-- Password Second Entry -->
+                <div>
+                    <h:outputLabel for="confirm" value="Confirm Password: " />
+                    <h:inputSecret id="confirm" binding="#{confirmPassword}" required="true" class="form-control input-md">
+                        <f:ajax event="blur" execute="email password confirm" render="m_error" />
+                    </h:inputSecret>
+                </div>
+
+                <!-- Submit Button -->
+                <h:commandButton class="btn btn-success" id="register" value="Register" action="#{userData.createUser()}" />
+            </h:form>
+        </div>
     </h:body>
 </html>
 

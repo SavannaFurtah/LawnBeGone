@@ -36,36 +36,6 @@ public class UserDataTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of createUser method, of class UserData.
-     */
-    @Test
-    public void testCreateUser() {
-        System.out.println("createUser");
-        UserData instance = new UserData();
-        String expResult = "";
-        String result = instance.createUser();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //I have no idea what I'm doing....
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of loginUser method, of class UserData.
-     */
-    @Test
-    public void testLoginUser() {
-        System.out.println("loginUser");
-        UserData instance = new UserData();
-        String expResult = "";
-        String result = instance.loginUser();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
      * Test of logoutUser method, of class UserData.
      */
@@ -73,11 +43,9 @@ public class UserDataTest {
     public void testLogoutUser() {
         System.out.println("logoutUser");
         UserData instance = new UserData();
-        String expResult = "";
+        String expResult = "index";
         String result = instance.logoutUser();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -86,26 +54,12 @@ public class UserDataTest {
     @Test
     public void testHashPass() {
         System.out.println("hashPass");
-        String pw = "";
+        String pw = "savanna";
         UserData instance = new UserData();
-        String expResult = "ERROR: Invalid Password";
+        String expResult = "886D7FFC29ED21159C98C5B74B3CB1CF828DA835";
         String result = instance.hashPass(pw);
         assertEquals(expResult, result);
        
-    }
-
-    /**
-     * Test of getCurrentUser method, of class UserData.
-     */
-    @Test
-    public void testGetCurrentUser() {
-        System.out.println("getCurrentUser");
-        UserData instance = new UserData();
-        User expResult = null;
-        User result = instance.getCurrentUser();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -117,8 +71,7 @@ public class UserDataTest {
         User currentUser = null;
         UserData instance = new UserData();
         instance.setCurrentUser(currentUser);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -128,11 +81,10 @@ public class UserDataTest {
     public void testGetPassword() {
         System.out.println("getPassword");
         UserData instance = new UserData();
-        String expResult = "";
+        String expResult = null ;
         String result = instance.getPassword();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -144,8 +96,7 @@ public class UserDataTest {
         String password = "";
         UserData instance = new UserData();
         instance.setPassword(password);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -158,8 +109,7 @@ public class UserDataTest {
         int expResult = 0;
         int result = instance.getNextUserId();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -171,8 +121,7 @@ public class UserDataTest {
         int nextUserId = 0;
         UserData instance = new UserData();
         instance.setNextUserId(nextUserId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -185,8 +134,7 @@ public class UserDataTest {
         UserList expResult = null;
         UserList result = instance.getUl();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -198,8 +146,7 @@ public class UserDataTest {
         UserList ul = null;
         UserData instance = new UserData();
         instance.setUl(ul);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -212,8 +159,7 @@ public class UserDataTest {
         boolean expResult = false;
         boolean result = instance.isLoggedIn();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -225,8 +171,7 @@ public class UserDataTest {
         boolean loggedIn = false;
         UserData instance = new UserData();
         instance.setLoggedIn(loggedIn);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+ 
     }
 
     /**
@@ -236,11 +181,10 @@ public class UserDataTest {
     public void testEdit() {
         System.out.println("edit");
         UserData instance = new UserData();
-        String expResult = "";
+        String expResult = "editUser";
         String result = instance.edit();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
     }
 
     /**
@@ -250,11 +194,10 @@ public class UserDataTest {
     public void testSaveUser() {
         System.out.println("saveUser");
         UserData instance = new UserData();
-        String expResult = "";
+        String expResult = "Login";
         String result = instance.saveUser();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
     
 }
